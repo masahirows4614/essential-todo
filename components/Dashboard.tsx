@@ -25,10 +25,22 @@ function greet() {
 }
 
 export default function Dashboard() {
-  const { tasks, settings, addTask, toggleTask, deleteTask, updateProgress, hydrated } = useTasks();
+  const {
+    tasks,
+    settings,
+    addTask,
+    updateTask,
+    toggleTask,
+    deleteTask,
+    updateProgress,
+    hydrated,
+  } = useTasks();
   const [filter, setFilter] = useState<FilterTab>("all");
   const [labelFilter, setLabelFilter] = useState<LabelFilterValue>("all");
   const [formOpen, setFormOpen] = useState(false);
+  const [editingTask, setEditingTask] = useState<null | (typeof tasks)[0]>(
+    null,
+  );
 
   const showCompleted = settings.showCompleted;
 
@@ -39,7 +51,12 @@ export default function Dashboard() {
         .filter((t) => filter === "all" || filter === "must")
         .filter((t) => labelFilter === "all" || t.category === labelFilter)
         .sort((a, b) => {
-          const pr: Record<string, number> = { urgent: 0, high: 1, normal: 2, low: 3 };
+          const pr: Record<string, number> = {
+            urgent: 0,
+            high: 1,
+            normal: 2,
+            low: 3,
+          };
           if (a.completed !== b.completed) return a.completed ? 1 : -1;
           return pr[a.priority] - pr[b.priority];
         }),
@@ -67,7 +84,9 @@ export default function Dashboard() {
   const axisProgress = useMemo(() => {
     const must = tasks.filter((t) => t.type === "must");
     if (!must.length) return 0;
-    return Math.round((must.filter((t) => t.completed).length / must.length) * 100);
+    return Math.round(
+      (must.filter((t) => t.completed).length / must.length) * 100,
+    );
   }, [tasks]);
 
   const allCount = tasks.filter((t) => !t.completed).length;
@@ -79,13 +98,25 @@ export default function Dashboard() {
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
             <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" strokeWidth="2.2">
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="none"
+                stroke="white"
+                strokeWidth="2.2"
+              >
                 <path d="M12 3C8 3 5 7 5 10s1 4 3 6" strokeLinecap="round" />
                 <path d="M12 3c4 0 7 4 7 7s-1 4-3 6" strokeLinecap="round" />
-                <path d="M8 16c1.5 2 2.5 3 4 3s2.5-1 4-3" strokeLinecap="round" />
+                <path
+                  d="M8 16c1.5 2 2.5 3 4 3s2.5-1 4-3"
+                  strokeLinecap="round"
+                />
               </svg>
             </div>
-            <span className="text-sm font-bold text-slate-800">Essential Flow</span>
+            <span className="text-sm font-bold text-slate-800">
+              Essential Flow
+            </span>
           </div>
           <AxisIndicator progress={axisProgress} compact />
         </div>
@@ -106,27 +137,48 @@ export default function Dashboard() {
       {/* Toolbar */}
       <div className="px-5 sm:px-8 lg:px-10 flex flex-col gap-3 pb-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <FilterTabs value={filter} onChange={setFilter} mustCount={counts.must} optionalCount={counts.optional} />
+          <FilterTabs
+            value={filter}
+            onChange={setFilter}
+            mustCount={counts.must}
+            optionalCount={counts.optional}
+          />
           <div className="flex items-center gap-2">
             {allCount === 0 && hydrated && (
-              <span className="text-xs text-emerald-500 font-semibold">全完了！🎉</span>
+              <span className="text-xs text-emerald-500 font-semibold">
+                全完了！🎉
+              </span>
             )}
             <motion.button
               type="button"
-              onClick={() => setFormOpen(true)}
+              onClick={() => {
+                setEditingTask(null);
+                setFormOpen(true);
+              }}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.96 }}
               transition={{ type: "spring", stiffness: 420, damping: 18 }}
               className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-3.5 py-2 text-xs font-semibold text-white shadow-md hover:brightness-105"
             >
-              <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="white" strokeWidth="2.2">
+              <svg
+                viewBox="0 0 20 20"
+                width="14"
+                height="14"
+                fill="none"
+                stroke="white"
+                strokeWidth="2.2"
+              >
                 <path d="M10 4v12M4 10h12" strokeLinecap="round" />
               </svg>
               タスクを追加
             </motion.button>
           </div>
         </div>
-        <LabelFilter value={labelFilter} onChange={setLabelFilter} tasks={tasks} />
+        <LabelFilter
+          value={labelFilter}
+          onChange={setLabelFilter}
+          tasks={tasks}
+        />
       </div>
 
       {/* Task sections */}
@@ -143,7 +195,11 @@ export default function Dashboard() {
             </div>
 
             {hydrated && mustTasks.length === 0 ? (
-              <EmptyState icon="📋" title="課題はありません" sub="素晴らしい！今日は自由な時間を楽しもう。" />
+              <EmptyState
+                icon="📋"
+                title="課題はありません"
+                sub="素晴らしい！今日は自由な時間を楽しもう。"
+              />
             ) : (
               <motion.div
                 layout
@@ -152,19 +208,43 @@ export default function Dashboard() {
               >
                 <AnimatePresence initial={false}>
                   {mustTasks.map((t) => (
-                    <motion.div key={t.id} layout className="shrink-0 w-[240px] lg:w-auto" style={{ scrollSnapAlign: "start" }}>
-                      <TaskCard task={t} onToggle={toggleTask} onDelete={deleteTask} onProgressChange={updateProgress} />
+                    <motion.div
+                      key={t.id}
+                      layout
+                      className="shrink-0 w-[240px] lg:w-auto"
+                      style={{ scrollSnapAlign: "start" }}
+                    >
+                      <TaskCard
+                        task={t}
+                        onToggle={toggleTask}
+                        onDelete={deleteTask}
+                        onProgressChange={updateProgress}
+                        onEdit={() => {
+                          setEditingTask(t);
+                          setFormOpen(true);
+                        }}
+                      />
                     </motion.div>
                   ))}
                 </AnimatePresence>
                 <motion.button
                   type="button"
-                  onClick={() => setFormOpen(true)}
+                  onClick={() => {
+                    setEditingTask(null);
+                    setFormOpen(true);
+                  }}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.97 }}
                   className="shrink-0 w-[200px] lg:w-auto flex flex-col items-center justify-center gap-2 rounded-3xl border-2 border-dashed border-slate-200 py-8 text-slate-300 hover:text-indigo-400 lg:min-h-[170px] transition"
                 >
-                  <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="28"
+                    height="28"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                  >
                     <path d="M12 5v14M5 12h14" strokeLinecap="round" />
                   </svg>
                   <span className="text-xs font-medium">課題を追加</span>
@@ -179,34 +259,63 @@ export default function Dashboard() {
           <section>
             <div className="mb-3 flex items-center gap-2">
               <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-              <h2 className="text-sm font-bold text-slate-700">オプション（Optional）</h2>
+              <h2 className="text-sm font-bold text-slate-700">
+                オプション（Optional）
+              </h2>
               <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-semibold text-emerald-600">
                 {optionalTasks.filter((t) => !t.completed).length}
               </span>
             </div>
 
             {hydrated && optionalTasks.length === 0 ? (
-              <EmptyState icon="🍃" title="オプションタスクはありません" sub="「やってもいいこと」を、気が向いたら追加しよう。" />
+              <EmptyState
+                icon="🍃"
+                title="オプションタスクはありません"
+                sub="「やってもいいこと」を、気が向いたら追加しよう。"
+              />
             ) : (
-              <motion.div layout className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <motion.div
+                layout
+                className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              >
                 <AnimatePresence initial={false}>
                   {optionalTasks.map((t) => (
                     <motion.div key={t.id} layout>
-                      <TaskCard task={t} onToggle={toggleTask} onDelete={deleteTask} />
+                      <TaskCard
+                        task={t}
+                        onToggle={toggleTask}
+                        onDelete={deleteTask}
+                        onEdit={() => {
+                          setEditingTask(t);
+                          setFormOpen(true);
+                        }}
+                      />
                     </motion.div>
                   ))}
                 </AnimatePresence>
                 <motion.button
                   type="button"
-                  onClick={() => setFormOpen(true)}
+                  onClick={() => {
+                    setEditingTask(null);
+                    setFormOpen(true);
+                  }}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.97 }}
                   className="card-optional flex min-h-[100px] flex-col items-center justify-center gap-2 border-2 border-dashed border-slate-100 bg-slate-50/50 text-slate-300 hover:border-emerald-200 hover:text-emerald-400 transition"
                 >
-                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                  >
                     <path d="M12 5v14M5 12h14" strokeLinecap="round" />
                   </svg>
-                  <span className="text-xs font-medium">気になることを追加</span>
+                  <span className="text-xs font-medium">
+                    気になることを追加
+                  </span>
                 </motion.button>
               </motion.div>
             )}
@@ -218,10 +327,16 @@ export default function Dashboard() {
       <nav className="fixed bottom-0 left-0 right-0 z-30 lg:hidden">
         <div className="glass-card border-t border-slate-200/60 px-2 pb-5 pt-2">
           <div className="flex items-center justify-around">
-            <Link href="/" className="flex flex-col items-center gap-0.5 px-3 py-1 text-[10px] font-medium text-indigo-600">
+            <Link
+              href="/"
+              className="flex flex-col items-center gap-0.5 px-3 py-1 text-[10px] font-medium text-indigo-600"
+            >
               <span className="text-xl leading-none">🏠</span>フロー
             </Link>
-            <Link href="/weekly" className="flex flex-col items-center gap-0.5 px-3 py-1 text-[10px] font-medium text-slate-400">
+            <Link
+              href="/weekly"
+              className="flex flex-col items-center gap-0.5 px-3 py-1 text-[10px] font-medium text-slate-400"
+            >
               <span className="text-xl leading-none">📅</span>週間
             </Link>
             <motion.button
@@ -231,26 +346,71 @@ export default function Dashboard() {
               whileTap={{ scale: 0.93 }}
               className="relative -mt-5 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 text-white shadow-lg shadow-indigo-300/50"
             >
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" strokeWidth="2.4">
+              <svg
+                viewBox="0 0 24 24"
+                width="22"
+                height="22"
+                fill="none"
+                stroke="white"
+                strokeWidth="2.4"
+              >
                 <path d="M12 5v14M5 12h14" strokeLinecap="round" />
               </svg>
             </motion.button>
-            <Link href="/projects" className="flex flex-col items-center gap-0.5 px-3 py-1 text-[10px] font-medium text-slate-400">
+            <Link
+              href="/projects"
+              className="flex flex-col items-center gap-0.5 px-3 py-1 text-[10px] font-medium text-slate-400"
+            >
               <span className="text-xl leading-none">📁</span>プロジェクト
             </Link>
-            <Link href="/settings" className="flex flex-col items-center gap-0.5 px-3 py-1 text-[10px] font-medium text-slate-400">
+            <Link
+              href="/settings"
+              className="flex flex-col items-center gap-0.5 px-3 py-1 text-[10px] font-medium text-slate-400"
+            >
               <span className="text-xl leading-none">⚙️</span>設定
             </Link>
           </div>
         </div>
       </nav>
 
-      <AddTaskForm open={formOpen} onClose={() => setFormOpen(false)} onAdd={addTask} />
+      <AddTaskForm
+        open={formOpen}
+        onClose={() => {
+          setFormOpen(false);
+          setEditingTask(null);
+        }}
+        onAdd={(task) => {
+          addTask(task);
+          setEditingTask(null);
+        }}
+        onUpdate={(updated) => {
+          updateTask(updated.id, {
+            title: updated.title,
+            notes: updated.notes,
+            type: updated.type,
+            category: updated.category,
+            priority: updated.priority,
+            progress: updated.progress,
+            deadline: updated.deadline,
+          });
+          setEditingTask(null);
+          setFormOpen(false);
+        }}
+        editingTask={editingTask}
+      />
     </div>
   );
 }
 
-function EmptyState({ icon, title, sub }: { icon: string; title: string; sub: string }) {
+function EmptyState({
+  icon,
+  title,
+  sub,
+}: {
+  icon: string;
+  title: string;
+  sub: string;
+}) {
   return (
     <div className="flex flex-col items-center justify-center rounded-3xl border-2 border-dashed border-slate-200 py-14 text-center">
       <div className="mb-3 text-4xl">{icon}</div>

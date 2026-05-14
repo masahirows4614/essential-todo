@@ -11,9 +11,16 @@ interface Props {
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
   onProgressChange?: (id: string, progress: number) => void;
+  onEdit?: () => void;
 }
 
-export default function TaskCard({ task, onToggle, onDelete, onProgressChange }: Props) {
+export default function TaskCard({
+  task,
+  onToggle,
+  onDelete,
+  onProgressChange,
+  onEdit,
+}: Props) {
   const cat = CATEGORIES[task.category];
   const reduce = useReducedMotion();
   const stale = useMemo(() => isStale(task), [task]);
@@ -82,7 +89,9 @@ export default function TaskCard({ task, onToggle, onDelete, onProgressChange }:
           <div className="flex items-start justify-between gap-2">
             <div className="flex flex-wrap items-center gap-1.5">
               {pri.label && (
-                <span className={`chip ${pri.cls} text-[11px]`}>{pri.label}</span>
+                <span className={`chip ${pri.cls} text-[11px]`}>
+                  {pri.label}
+                </span>
               )}
               {stale && (
                 <span className="chip bg-white/20 text-white/80 text-[11px]">
@@ -138,14 +147,21 @@ export default function TaskCard({ task, onToggle, onDelete, onProgressChange }:
             {/* Quick progress buttons on hover */}
             <motion.div
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: hovered && onProgressChange ? 1 : 0, height: hovered && onProgressChange ? "auto" : 0 }}
+              animate={{
+                opacity: hovered && onProgressChange ? 1 : 0,
+                height: hovered && onProgressChange ? "auto" : 0,
+              }}
               className="overflow-hidden"
             >
               <input
                 type="range"
-                min={0} max={100} step={10}
+                min={0}
+                max={100}
+                step={10}
                 value={task.progress}
-                onChange={(e) => onProgressChange?.(task.id, Number(e.target.value))}
+                onChange={(e) =>
+                  onProgressChange?.(task.id, Number(e.target.value))
+                }
                 onClick={(e) => e.stopPropagation()}
                 className="mt-2 w-full cursor-pointer accent-white"
               />
@@ -193,15 +209,43 @@ export default function TaskCard({ task, onToggle, onDelete, onProgressChange }:
           </motion.h3>
 
           {task.notes && (
-            <p className="mt-1 text-xs text-slate-400 leading-snug">{task.notes}</p>
+            <p className="mt-1 text-xs text-slate-400 leading-snug">
+              {task.notes}
+            </p>
           )}
         </>
       )}
 
+      {/* Edit button */}
+      <motion.button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          onEdit?.();
+        }}
+        aria-label="編集"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: hovered ? 1 : 0 }}
+        whileHover={{ scale: 1.06 }}
+        whileTap={{ scale: 0.95 }}
+        className={`absolute right-12 top-2 rounded-full p-1.5 transition ${
+          isMust
+            ? "text-white/60 hover:bg-white/20 hover:text-white"
+            : "text-slate-300 hover:bg-slate-100 hover:text-slate-500"
+        }`}
+      >
+        <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor">
+          <path d="M12.3 2.7a1 1 0 0 1 1.4 1.4L6.4 11.4 4 12l.6-2.4L12.3 2.7z" />
+        </svg>
+      </motion.button>
+
       {/* Delete button */}
       <motion.button
         type="button"
-        onClick={() => onDelete(task.id)}
+        onClick={(e) => {
+          e.stopPropagation();
+          onDelete(task.id);
+        }}
         aria-label="削除"
         initial={{ opacity: 0 }}
         animate={{ opacity: hovered ? 1 : 0 }}
@@ -245,8 +289,8 @@ function CheckCircle({
             ? "bg-emerald-400 ring-emerald-400"
             : "bg-white/40 ring-white/50"
           : dark
-          ? "bg-transparent ring-slate-200 hover:ring-indigo-300"
-          : "bg-white/10 ring-white/30 hover:ring-white/60"
+            ? "bg-transparent ring-slate-200 hover:ring-indigo-300"
+            : "bg-white/10 ring-white/30 hover:ring-white/60"
       }`}
     >
       <motion.svg
@@ -259,7 +303,11 @@ function CheckCircle({
         strokeLinecap="round"
         strokeLinejoin="round"
         initial={false}
-        animate={checked ? { opacity: 1, scale: [0, 1.4, 1] } : { opacity: 0, scale: 0.4 }}
+        animate={
+          checked
+            ? { opacity: 1, scale: [0, 1.4, 1] }
+            : { opacity: 0, scale: 0.4 }
+        }
         transition={{ duration: 0.35, ease: [0.34, 1.56, 0.64, 1] }}
       >
         <path d="M2.5 7l3.5 3.5 5.5-6" />
@@ -270,7 +318,14 @@ function CheckCircle({
 
 function ClockIcon() {
   return (
-    <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <svg
+      viewBox="0 0 16 16"
+      width="12"
+      height="12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+    >
       <circle cx="8" cy="8" r="6" />
       <path d="M8 5v3.5l2 1.5" strokeLinecap="round" />
     </svg>

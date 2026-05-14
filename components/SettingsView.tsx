@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useTasks } from "@/contexts/TaskContext";
 import { useAuth } from "./AuthProvider";
+import { createClient } from "@/lib/supabase";
 import Link from "next/link";
 
 const MOOD_PRESETS = [
@@ -19,12 +20,17 @@ export default function SettingsView() {
   const { user, signOut } = useAuth();
   const { settings, updateSettings, tasks } = useTasks();
   const [confirmReset, setConfirmReset] = useState(false);
+  const supabase = createClient();
 
-  function handleReset() {
-    if (typeof window !== "undefined") {
-      localStorage.clear();
-      window.location.reload();
-    }
+  async function handleReset() {
+    if (!user) return;
+    // Supabase DB からそのユーザーのデータを全削除（RLSにより自分のデータのみ削除される）
+    await Promise.all([
+      supabase.from("tasks").delete().eq("user_id", user.id),
+      supabase.from("projects").delete().eq("user_id", user.id),
+      supabase.from("settings").delete().eq("user_id", user.id),
+    ]);
+    window.location.reload();
   }
 
   const completedCount = tasks.filter((t) => t.completed).length;
@@ -198,7 +204,7 @@ export default function SettingsView() {
         {/* Data */}
         <Section title="データ管理" emoji="🗂️">
           <div className="space-y-2">
-            <p className="text-xs text-slate-400">すべてのデータはブラウザのlocalStorageに保存されています</p>
+            <p className="text-xs text-slate-400">すべてのデータはサーバー（Supabase）に保存されています</p>
             {!confirmReset ? (
               <button
                 type="button"
