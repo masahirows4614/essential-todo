@@ -52,6 +52,17 @@ const NAV_ITEMS = [
     ),
   },
   {
+    href: "/axis",
+    label: "自分軸",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" width="18" height="18">
+        <circle cx="10" cy="10" r="7" />
+        <path d="M10 6v4l3 2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M6 10h1M13 10h1M10 6v1M10 13v1" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
     href: "/settings",
     label: "設定",
     icon: (

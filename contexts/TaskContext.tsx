@@ -168,16 +168,32 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
         supabase.from("settings").select("*").eq("user_id", user.id).maybeSingle(),
       ]);
 
+      // エラーチェック: DBエラー時はそのまま空で返す（再シードしない）
+      if (tasksRes.error) {
+        console.error("[TaskContext] tasks fetch error:", tasksRes.error);
+        setTasks([]);
+        setProjects((projectsRes.data ?? []).map(rowToProject));
+        setSettings(settingsRes.data ? rowToSettings(settingsRes.data) : DEFAULT_SETTINGS);
+        setHydrated(true);
+        return;
+      }
+
       const loadedTasks: Task[] = (tasksRes.data ?? []).map(rowToTask);
       const loadedProjects: Project[] = (projectsRes.data ?? []).map(rowToProject);
       const loadedSettings: AppSettings = settingsRes.data
         ? rowToSettings(settingsRes.data)
         : DEFAULT_SETTINGS;
 
-      // 新規ユーザー: タスクが空なら DEFAULT_TASKS を挿入
-      if (loadedTasks.length === 0) {
+      // 新規ユーザーのみシード: settingsが未作成（初回ログイン）かつタスクが0件
+      const isNewUser = !settingsRes.data;
+      if (loadedTasks.length === 0 && isNewUser) {
         const seeded = DEFAULT_TASKS.map((t) => ({ ...t, id: uid() }));
         await supabase.from("tasks").insert(seeded.map((t) => taskToRow(t, user.id)));
+        // 初回シード完了を settings に記録（再シード防止）
+        await supabase.from("settings").upsert(
+          { ...settingsToRow(DEFAULT_SETTINGS, user.id) },
+          { onConflict: "user_id" }
+        );
         setTasks(seeded);
       } else {
         setTasks(loadedTasks);

@@ -14,6 +14,42 @@ interface Props {
   onEdit?: () => void;
 }
 
+// ── 優先度ごとの設定 ────────────────────────────────────────────────
+const PRIORITY_CONFIG = {
+  urgent: {
+    gradient: "linear-gradient(135deg, #ef4444 0%, #f97316 100%)",
+    glow: "rgba(239,68,68,0.35)",
+    badge: "bg-white/25 text-white",
+    label: "🔴 最優先",
+    minH: "min-h-[180px]",
+    titleSize: "text-xl",
+  },
+  high: {
+    gradient: "linear-gradient(135deg, #f97316 0%, #fbbf24 100%)",
+    glow: "rgba(249,115,22,0.3)",
+    badge: "bg-white/20 text-white",
+    label: "🟠 高優先",
+    minH: "min-h-[160px]",
+    titleSize: "text-lg",
+  },
+  normal: {
+    gradient: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
+    glow: "rgba(99,102,241,0.25)",
+    badge: "bg-white/15 text-white/90",
+    label: "",
+    minH: "min-h-[140px]",
+    titleSize: "text-base",
+  },
+  low: {
+    gradient: "linear-gradient(135deg, #10b981 0%, #06b6d4 100%)",
+    glow: "rgba(16,185,129,0.2)",
+    badge: "bg-white/15 text-white/85",
+    label: "",
+    minH: "min-h-[120px]",
+    titleSize: "text-sm",
+  },
+} as const;
+
 export default function TaskCard({
   task,
   onToggle,
@@ -25,242 +61,184 @@ export default function TaskCard({
   const reduce = useReducedMotion();
   const stale = useMemo(() => isStale(task), [task]);
   const age = useMemo(() => daysOld(task), [task]);
-  const [hovered, setHovered] = useState(false);
+  const [showActions, setShowActions] = useState(false);
 
   const isMust = task.type === "must";
-
-  const spring = {
-    type: "spring" as const,
-    stiffness: 360,
-    damping: 20,
-    mass: 0.8,
-  };
-
-  const priorityLabel: Record<string, { label: string; cls: string }> = {
-    urgent: { label: "最優先", cls: "bg-white/30 text-white" },
-    high: { label: "優先", cls: "bg-white/20 text-white/90" },
-    normal: { label: "", cls: "" },
-    low: { label: "", cls: "" },
-  };
-  const pri = priorityLabel[task.priority];
+  const cfg = PRIORITY_CONFIG[task.priority ?? "normal"];
 
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 14, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -8, scale: 0.9 }}
-      transition={spring}
-      whileHover={reduce ? undefined : { scale: 1.03, y: -4 }}
+      initial={{ opacity: 0, y: 16, scale: 0.93 }}
+      animate={{ opacity: task.completed ? 0.55 : 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -10, scale: 0.88 }}
+      transition={{ type: "spring", stiffness: 340, damping: 22, mass: 0.7 }}
+      whileHover={reduce ? undefined : { scale: 1.025, y: -3 }}
       whileTap={reduce ? undefined : { scale: 0.97 }}
-      drag={reduce ? false : "y"}
-      dragConstraints={{ top: 0, bottom: 0 }}
-      dragElastic={0.18}
-      dragTransition={{ bounceStiffness: 500, bounceDamping: 22 }}
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      className={`relative overflow-hidden ${
-        isMust ? "card-must min-w-[200px]" : "card-optional min-w-[180px]"
-      } ${task.completed ? "opacity-60" : ""}`}
-      style={{ padding: "1.25rem" }}
+      onHoverStart={() => setShowActions(true)}
+      onHoverEnd={() => setShowActions(false)}
+      onTouchStart={() => setShowActions((v) => !v)}
+      className={`relative overflow-hidden rounded-3xl p-4 shadow-lg cursor-pointer select-none ${
+        isMust ? cfg.minH : "min-h-[100px]"
+      }`}
+      style={
+        isMust
+          ? {
+              background: cfg.gradient,
+              boxShadow: `0 8px 32px ${cfg.glow}, 0 2px 8px rgba(0,0,0,0.08)`,
+            }
+          : {
+              background: "white",
+              boxShadow: "0 2px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)",
+            }
+      }
     >
-      {/* Completion shimmer overlay */}
-      <motion.div
-        aria-hidden
-        initial={false}
-        animate={
-          task.completed
-            ? { opacity: [0, 0.6, 0], scale: [0.8, 1.3, 1.6] }
-            : { opacity: 0, scale: 0.8 }
-        }
-        transition={{ duration: 0.55, ease: "easeOut" }}
-        className="pointer-events-none absolute -inset-2 rounded-3xl"
-        style={{
-          background: isMust
-            ? "radial-gradient(circle, rgba(165,243,252,0.5) 0%, transparent 65%)"
-            : "radial-gradient(circle, rgba(110,231,183,0.45) 0%, transparent 65%)",
-        }}
-      />
-
-      {/* ── Must card ─────────────────────── */}
+      {/* ── Must Card ─────────────────────────────── */}
       {isMust && (
-        <>
-          {/* Top row: priority badge + checkbox */}
+        <div className="flex flex-col h-full gap-2">
+          {/* Top row */}
           <div className="flex items-start justify-between gap-2">
-            <div className="flex flex-wrap items-center gap-1.5">
-              {pri.label && (
-                <span className={`chip ${pri.cls} text-[11px]`}>
-                  {pri.label}
+            <div className="flex flex-wrap gap-1.5">
+              {cfg.label && (
+                <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${cfg.badge}`}>
+                  {cfg.label}
                 </span>
               )}
               {stale && (
-                <span className="chip bg-white/20 text-white/80 text-[11px]">
-                  🪶 本当に必要?
+                <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-medium text-white/85">
+                  🪶 {age}日経過
                 </span>
               )}
             </div>
-            <CheckCircle
-              checked={task.completed}
-              onToggle={() => onToggle(task.id)}
-              dark={false}
-              reduce={reduce}
-            />
+            <CheckCircle checked={task.completed} onToggle={() => onToggle(task.id)} reduce={reduce} />
           </div>
 
           {/* Title */}
-          <motion.h3
-            layout="position"
-            className={`mt-3 text-lg font-bold leading-snug text-white ${
-              task.completed ? "line-through opacity-70" : ""
-            }`}
-          >
+          <h3 className={`font-bold leading-snug text-white ${cfg.titleSize} ${task.completed ? "line-through opacity-70" : ""}`}>
             {task.title}
-          </motion.h3>
+          </h3>
+
+          {task.notes && (
+            <p className="text-xs text-white/70 leading-snug line-clamp-2">{task.notes}</p>
+          )}
+
+          <div className="flex-1" />
 
           {/* Deadline */}
           {task.deadline && (
-            <div className="mt-2 flex items-center gap-1.5 text-white/75 text-xs">
-              <ClockIcon />
-              <span>締切: {task.deadline}</span>
+            <div className="flex items-center gap-1 text-white/75 text-[11px]">
+              <svg viewBox="0 0 14 14" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="1.6">
+                <circle cx="7" cy="7" r="5" /><path d="M7 4.5V7l1.5 1.5" strokeLinecap="round" />
+              </svg>
+              <span>{task.deadline}</span>
             </div>
           )}
 
-          {/* Category chip */}
-          <span className={`chip mt-2 ${cat.chipDark} text-[11px]`}>
+          {/* Category */}
+          <span className={`inline-flex w-fit items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium ${cfg.badge}`}>
             {cat.emoji} {cat.name}
           </span>
 
-          {/* Progress bar */}
-          <div className="mt-3">
-            <div className="mb-1 flex items-center justify-between text-[11px] text-white/70">
+          {/* Progress */}
+          <div>
+            <div className="mb-1 flex justify-between text-[10px] text-white/65">
               <span>進捗</span>
-              <span className="tabular-nums">{task.progress}%</span>
+              <span className="tabular-nums font-bold">{task.progress}%</span>
             </div>
-            <div className="progress-track">
+            <div className="h-1.5 rounded-full bg-white/20 overflow-hidden">
               <motion.div
-                className="progress-fill"
+                className="h-full rounded-full bg-white/80"
                 initial={{ width: 0 }}
                 animate={{ width: `${task.progress}%` }}
-                transition={{ duration: 0.9, ease: [0.34, 1.56, 0.64, 1] }}
+                transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
               />
             </div>
-            {/* Quick progress buttons on hover */}
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{
-                opacity: hovered && onProgressChange ? 1 : 0,
-                height: hovered && onProgressChange ? "auto" : 0,
-              }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: showActions && onProgressChange ? "auto" : 0, opacity: showActions && onProgressChange ? 1 : 0 }}
               className="overflow-hidden"
             >
               <input
-                type="range"
-                min={0}
-                max={100}
-                step={10}
+                type="range" min={0} max={100} step={5}
                 value={task.progress}
-                onChange={(e) =>
-                  onProgressChange?.(task.id, Number(e.target.value))
-                }
+                onChange={(e) => onProgressChange?.(task.id, Number(e.target.value))}
                 onClick={(e) => e.stopPropagation()}
-                className="mt-2 w-full cursor-pointer accent-white"
+                className="mt-1.5 w-full accent-white cursor-pointer"
               />
             </motion.div>
           </div>
-        </>
+        </div>
       )}
 
-      {/* ── Optional card ─────────────────── */}
+      {/* ── Optional Card ──────────────────────────── */}
       {!isMust && (
-        <>
-          {/* Category + stale chip */}
-          <div className="flex items-center justify-between gap-2">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-start justify-between gap-2">
             <div className="flex flex-wrap gap-1.5">
-              <span className={`chip ${cat.chip} text-[11px]`}>
+              <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${cat.chip}`}>
                 {cat.emoji} {cat.name}
               </span>
               {stale && (
-                <motion.span
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  className="chip bg-fuchsia-100 text-fuchsia-700 text-[11px]"
-                  title={`${age}日間オープン — これ、本当に必要？`}
-                >
+                <span className="rounded-full bg-fuchsia-100 px-2 py-0.5 text-[10px] font-medium text-fuchsia-700">
                   🪶 {age}日経過
-                </motion.span>
+                </span>
               )}
             </div>
-            <CheckCircle
-              checked={task.completed}
-              onToggle={() => onToggle(task.id)}
-              dark={true}
-              reduce={reduce}
-            />
+            <CheckCircle checked={task.completed} onToggle={() => onToggle(task.id)} reduce={reduce} dark />
           </div>
 
-          {/* Title */}
-          <motion.h3
-            layout="position"
-            className={`mt-2.5 text-base font-semibold leading-snug text-slate-800 ${
-              task.completed ? "line-through opacity-60" : ""
-            }`}
-          >
+          <h3 className={`text-sm font-semibold leading-snug text-slate-800 ${task.completed ? "line-through opacity-60" : ""}`}>
             {task.title}
-          </motion.h3>
+          </h3>
 
           {task.notes && (
-            <p className="mt-1 text-xs text-slate-400 leading-snug">
-              {task.notes}
-            </p>
+            <p className="text-xs text-slate-400 leading-snug line-clamp-2">{task.notes}</p>
           )}
-        </>
+
+          {task.deadline && (
+            <div className="flex items-center gap-1 text-slate-400 text-[11px]">
+              <svg viewBox="0 0 14 14" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="1.6">
+                <circle cx="7" cy="7" r="5" /><path d="M7 4.5V7l1.5 1.5" strokeLinecap="round" />
+              </svg>
+              <span>{task.deadline}</span>
+            </div>
+          )}
+        </div>
       )}
 
-      {/* Edit button */}
-      <motion.button
-        type="button"
-        onClick={(e) => {
-          e.stopPropagation();
-          onEdit?.();
-        }}
-        aria-label="編集"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: hovered ? 1 : 0 }}
-        whileHover={{ scale: 1.06 }}
-        whileTap={{ scale: 0.95 }}
-        className={`absolute right-12 top-2 rounded-full p-1.5 transition ${
-          isMust
-            ? "text-white/60 hover:bg-white/20 hover:text-white"
-            : "text-slate-300 hover:bg-slate-100 hover:text-slate-500"
-        }`}
+      {/* ── Action buttons ─── */}
+      <motion.div
+        initial={{ opacity: 0, y: 4 }}
+        animate={{ opacity: showActions ? 1 : 0, y: showActions ? 0 : 4 }}
+        transition={{ duration: 0.15 }}
+        className="absolute bottom-2.5 right-2.5 flex gap-1.5"
+        onClick={(e) => e.stopPropagation()}
       >
-        <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor">
-          <path d="M12.3 2.7a1 1 0 0 1 1.4 1.4L6.4 11.4 4 12l.6-2.4L12.3 2.7z" />
-        </svg>
-      </motion.button>
-
-      {/* Delete button */}
-      <motion.button
-        type="button"
-        onClick={(e) => {
-          e.stopPropagation();
-          onDelete(task.id);
-        }}
-        aria-label="削除"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: hovered ? 1 : 0 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className={`absolute right-2 top-2 rounded-full p-1.5 transition ${
-          isMust
-            ? "text-white/60 hover:bg-white/20 hover:text-white"
-            : "text-slate-300 hover:bg-slate-100 hover:text-slate-500"
-        }`}
-      >
-        <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor">
-          <path d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L6.94 8l-2.72 2.72a.75.75 0 1 0 1.06 1.06L8 9.06l2.72 2.72a.75.75 0 1 0 1.06-1.06L9.06 8l2.72-2.72a.75.75 0 0 0-1.06-1.06L8 6.94 5.28 4.22Z" />
-        </svg>
-      </motion.button>
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); onEdit?.(); }}
+          aria-label="編集"
+          className={`flex items-center gap-1 rounded-xl px-2.5 py-1.5 text-[11px] font-semibold shadow-sm transition ${
+            isMust
+              ? "bg-white/25 text-white hover:bg-white/40"
+              : "bg-slate-100 text-slate-500 hover:bg-indigo-50 hover:text-indigo-600"
+          }`}
+        >
+          ✏️ 編集
+        </button>
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); onDelete(task.id); }}
+          aria-label="削除"
+          className={`flex items-center gap-1 rounded-xl px-2.5 py-1.5 text-[11px] font-semibold shadow-sm transition ${
+            isMust
+              ? "bg-white/20 text-white/80 hover:bg-white/35"
+              : "bg-rose-50 text-rose-400 hover:bg-rose-100"
+          }`}
+        >
+          🗑️ 削除
+        </button>
+      </motion.div>
     </motion.div>
   );
 }
@@ -268,66 +246,37 @@ export default function TaskCard({
 function CheckCircle({
   checked,
   onToggle,
-  dark,
   reduce,
+  dark = false,
 }: {
   checked: boolean;
   onToggle: () => void;
-  dark: boolean;
   reduce: boolean | null;
+  dark?: boolean;
 }) {
   return (
     <motion.button
       type="button"
-      onClick={onToggle}
-      whileTap={reduce ? undefined : { scale: 0.82 }}
+      onClick={(e) => { e.stopPropagation(); onToggle(); }}
+      whileTap={reduce ? undefined : { scale: 0.8 }}
       transition={{ type: "spring", stiffness: 500, damping: 18 }}
       aria-pressed={checked}
       className={`grid h-7 w-7 shrink-0 place-items-center rounded-full ring-2 transition-colors ${
         checked
-          ? dark
-            ? "bg-emerald-400 ring-emerald-400"
-            : "bg-white/40 ring-white/50"
-          : dark
-            ? "bg-transparent ring-slate-200 hover:ring-indigo-300"
-            : "bg-white/10 ring-white/30 hover:ring-white/60"
+          ? dark ? "bg-emerald-400 ring-emerald-400" : "bg-white/50 ring-white/60"
+          : dark ? "bg-transparent ring-slate-200 hover:ring-indigo-300" : "bg-white/15 ring-white/40 hover:ring-white/70"
       }`}
     >
       <motion.svg
-        viewBox="0 0 14 14"
-        width="14"
-        height="14"
-        fill="none"
-        stroke={dark ? "white" : "white"}
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        viewBox="0 0 14 14" width="13" height="13"
+        fill="none" stroke="white" strokeWidth="2.2"
+        strokeLinecap="round" strokeLinejoin="round"
         initial={false}
-        animate={
-          checked
-            ? { opacity: 1, scale: [0, 1.4, 1] }
-            : { opacity: 0, scale: 0.4 }
-        }
-        transition={{ duration: 0.35, ease: [0.34, 1.56, 0.64, 1] }}
+        animate={checked ? { opacity: 1, scale: [0, 1.3, 1] } : { opacity: 0, scale: 0.4 }}
+        transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
       >
         <path d="M2.5 7l3.5 3.5 5.5-6" />
       </motion.svg>
     </motion.button>
-  );
-}
-
-function ClockIcon() {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      width="12"
-      height="12"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-    >
-      <circle cx="8" cy="8" r="6" />
-      <path d="M8 5v3.5l2 1.5" strokeLinecap="round" />
-    </svg>
   );
 }
