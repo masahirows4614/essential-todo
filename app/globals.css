@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --accent: #4361EE;
+  --accent-2: #7C5CE5;
+  --must-from: #4361EE;
+  --must-to: #7C5CE5;
+}
+
+html, body { height: 100%; }
+
+body {
+  @apply antialiased text-slate-800;
+  background-color: #eceef9;
+  background-image:
+    radial-gradient(700px 500px at 90% 5%,  rgba(124,92,229,0.13), transparent 60%),
+    radial-gradient(500px 400px at 0%  80%, rgba(67,97,238,0.10),  transparent 60%);
+}
+
+/* ── Auth background ─────────────────────────────────── */
+.auth-bg {
+  background-color: #eceef9;
+  background-image:
+    radial-gradient(900px 600px at 80%  0%,  rgba(124,92,229,0.30), transparent 55%),
+    radial-gradient(600px 500px at 0%  100%, rgba(67,97,238,0.20),  transparent 55%),
+    radial-gradient(500px 400px at 50%  50%, rgba(99,102,241,0.12), transparent 60%);
+}
+
+/* ── Component utilities ─────────────────────────────── */
+@layer components {
+  .glass-sidebar {
+    @apply bg-white/90 backdrop-blur-2xl shadow-sidebar;
+  }
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-xl ring-1 ring-slate-200/80 shadow-card;
+  }
+  .glass-float {
+    @apply bg-white/70 backdrop-blur-xl ring-1 ring-white/60 shadow-glass;
+  }
+  .card-must {
+    background: linear-gradient(135deg, var(--must-from) 0%, var(--must-to) 100%);
+    @apply shadow-card-must rounded-3xl;
+  }
+  .card-optional {
+    @apply bg-white ring-1 ring-slate-100 shadow-card rounded-3xl;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+  .progress-track {
+    @apply h-1.5 rounded-full bg-white/25 overflow-hidden;
+  }
+  .progress-fill {
+    @apply h-full rounded-full bg-white/90;
+    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  /* Weekly board columns */
+  .week-col {
+    @apply flex flex-col rounded-3xl bg-white/60 ring-1 ring-slate-200/60 backdrop-blur-md
+           transition-colors min-w-[180px];
+  }
+  .week-col.is-over {
+    @apply bg-indigo-50/80 ring-indigo-200;
+  }
+  .week-col.is-today {
+    @apply ring-indigo-300 bg-indigo-50/50;
+  }
+}
+
+/* ── Input resets ────────────────────────────────────── */
+input[type="range"]::-webkit-slider-thumb {
+  @apply cursor-pointer;
+}
+
+/* ── Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { @apply bg-slate-200 rounded-full; }
+::-webkit-scrollbar-thumb:hover { @apply bg-slate-300; }
