@@ -124,14 +124,21 @@ export default function Dashboard() {
 
       {/* Page header */}
       <div className="px-5 pt-7 pb-4 sm:px-8 lg:px-10 lg:pt-10">
-        <p className="text-sm text-slate-400 font-medium">{greet()} 👋</p>
+        <div className="flex items-center gap-2">
+          <motion.span
+            animate={{ rotate: [0, 15, -10, 15, 0] }}
+            transition={{ duration: 1.2, delay: 0.3, repeat: Infinity, repeatDelay: 6 }}
+            className="text-xl"
+          >👋</motion.span>
+          <p className="text-sm text-slate-400 font-medium">{greet()}</p>
+        </div>
         <h1 className="mt-1 text-2xl font-bold leading-tight text-slate-800 sm:text-3xl">
           今日のフローを
-          <span className="bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">
+          <span className="text-gradient ml-1">
             デザインしよう。
           </span>
         </h1>
-        <p className="mt-1 text-xs text-slate-400">{today}</p>
+        <p className="mt-1.5 text-xs text-slate-400 font-medium">{today}</p>
       </div>
 
       {/* Toolbar */}
@@ -155,10 +162,10 @@ export default function Dashboard() {
                 setEditingTask(null);
                 setFormOpen(true);
               }}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.96 }}
+              whileHover={{ scale: 1.04, y: -1 }}
+              whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 420, damping: 18 }}
-              className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-3.5 py-2 text-xs font-semibold text-white shadow-md hover:brightness-105"
+              className="btn-pop text-xs"
             >
               <svg
                 viewBox="0 0 20 20"
@@ -187,9 +194,9 @@ export default function Dashboard() {
         {(filter === "all" || filter === "must") && (
           <section>
             <div className="mb-3 flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-indigo-500" />
+              <span className="section-dot-must" />
               <h2 className="text-sm font-bold text-slate-700">課題（Must）</h2>
-              <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-[11px] font-semibold text-indigo-600">
+              <span className="rounded-full bg-gradient-to-r from-indigo-100 to-violet-100 px-2 py-0.5 text-[11px] font-bold text-indigo-600">
                 {mustTasks.filter((t) => !t.completed).length}
               </span>
             </div>
@@ -258,11 +265,11 @@ export default function Dashboard() {
         {(filter === "all" || filter === "optional") && (
           <section>
             <div className="mb-3 flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+              <span className="section-dot-optional" />
               <h2 className="text-sm font-bold text-slate-700">
                 オプション（Optional）
               </h2>
-              <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-semibold text-emerald-600">
+              <span className="rounded-full bg-gradient-to-r from-emerald-100 to-teal-100 px-2 py-0.5 text-[11px] font-bold text-emerald-600">
                 {optionalTasks.filter((t) => !t.completed).length}
               </span>
             </div>

@@ -14,28 +14,39 @@ html, body { height: 100%; }
 
 body {
   @apply antialiased text-slate-800;
-  background-color: #eceef9;
+  background-color: #edf0fc;
   background-image:
-    radial-gradient(700px 500px at 90% 5%,  rgba(124,92,229,0.13), transparent 60%),
-    radial-gradient(500px 400px at 0%  80%, rgba(67,97,238,0.10),  transparent 60%);
+    radial-gradient(ellipse 700px 500px at 92%  4%,  rgba(124,92,229,0.18), transparent 60%),
+    radial-gradient(ellipse 500px 400px at 2%   80%, rgba(67,97,238,0.14),  transparent 60%),
+    radial-gradient(ellipse 400px 300px at 50%  50%, rgba(99,102,241,0.06), transparent 70%);
+}
+
+/* ── App content background (page fills) ─────────────── */
+.bg-app {
+  background-color: #edf0fc;
+  background-image:
+    radial-gradient(ellipse 600px 400px at 90%  5%,  rgba(124,92,229,0.14), transparent 55%),
+    radial-gradient(ellipse 400px 350px at 0%  85%, rgba(67,97,238,0.10),  transparent 55%);
 }
 
 /* ── Auth background ─────────────────────────────────── */
 .auth-bg {
-  background-color: #eceef9;
+  background-color: #edf0fc;
   background-image:
-    radial-gradient(900px 600px at 80%  0%,  rgba(124,92,229,0.30), transparent 55%),
-    radial-gradient(600px 500px at 0%  100%, rgba(67,97,238,0.20),  transparent 55%),
-    radial-gradient(500px 400px at 50%  50%, rgba(99,102,241,0.12), transparent 60%);
+    radial-gradient(ellipse 900px 600px at 80%  0%,  rgba(124,92,229,0.32), transparent 55%),
+    radial-gradient(ellipse 600px 500px at 0%  100%, rgba(67,97,238,0.22),  transparent 55%),
+    radial-gradient(ellipse 500px 400px at 50%  50%, rgba(99,102,241,0.14), transparent 60%);
 }
 
 /* ── Component utilities ─────────────────────────────── */
 @layer components {
   .glass-sidebar {
-    @apply bg-white/90 backdrop-blur-2xl shadow-sidebar;
+    background: rgba(255,255,255,0.88);
+    @apply backdrop-blur-2xl shadow-sidebar;
+    border-right: 1px solid rgba(255,255,255,0.6);
   }
   .glass-card {
-    @apply bg-white/80 backdrop-blur-xl ring-1 ring-slate-200/80 shadow-card;
+    @apply bg-white/85 backdrop-blur-xl ring-1 ring-slate-200/80 shadow-card;
   }
   .glass-float {
     @apply bg-white/70 backdrop-blur-xl ring-1 ring-white/60 shadow-glass;
@@ -59,14 +70,42 @@ body {
   }
   /* Weekly board columns */
   .week-col {
-    @apply flex flex-col rounded-3xl bg-white/60 ring-1 ring-slate-200/60 backdrop-blur-md
+    @apply flex flex-col rounded-3xl bg-white/65 ring-1 ring-slate-200/60 backdrop-blur-md
            transition-colors min-w-[180px];
   }
   .week-col.is-over {
     @apply bg-indigo-50/80 ring-indigo-200;
   }
   .week-col.is-today {
-    @apply ring-indigo-300 bg-indigo-50/50;
+    @apply ring-2 ring-indigo-400 bg-indigo-50/60;
+  }
+
+  /* ── Pop button ────────────────────────────────────── */
+  .btn-pop {
+    @apply inline-flex items-center gap-2 rounded-2xl px-4 py-2.5 text-sm font-semibold
+           text-white shadow-lg transition-all;
+    background: linear-gradient(135deg, #4361EE 0%, #7C5CE5 100%);
+    box-shadow: 0 6px 20px rgba(67,97,238,0.35), 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .btn-pop:hover {
+    filter: brightness(1.07);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(67,97,238,0.4), 0 2px 8px rgba(0,0,0,0.10);
+  }
+  .btn-pop:active {
+    transform: translateY(0);
+  }
+
+  /* ── Section header dots ─────────────────────────── */
+  .section-dot-must {
+    @apply h-2.5 w-2.5 rounded-full;
+    background: linear-gradient(135deg, #4361EE, #7C5CE5);
+    box-shadow: 0 0 0 3px rgba(67,97,238,0.2);
+  }
+  .section-dot-optional {
+    @apply h-2.5 w-2.5 rounded-full;
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.2);
   }
 }
 
@@ -80,3 +119,26 @@ input[type="range"]::-webkit-slider-thumb {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { @apply bg-slate-200 rounded-full; }
 ::-webkit-scrollbar-thumb:hover { @apply bg-slate-300; }
+
+/* ── Pop card hover lift ─────────────────────────────── */
+.card-lift {
+  transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+}
+
+/* ── Gradient text ───────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, #4361EE 0%, #7C5CE5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-gradient-warm {
+  background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

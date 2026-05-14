@@ -29,6 +29,7 @@ interface AuthContextValue {
     password: string,
   ) => Promise<{ ok: boolean; error?: string }>;
   signOut: () => void;
+  updateProfile: (patch: { name?: string; avatarColor?: string }) => Promise<{ ok: boolean; error?: string }>;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -129,8 +130,24 @@ export default function AuthProvider({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const updateProfile = useCallback(
+    async (patch: { name?: string; avatarColor?: string }) => {
+      const { error, data } = await supabase.auth.updateUser({
+        data: {
+          ...(patch.name !== undefined && { name: patch.name }),
+          ...(patch.avatarColor !== undefined && { avatarColor: patch.avatarColor }),
+        },
+      });
+      if (error) return { ok: false, error: error.message };
+      if (data.user) setUser(sessionToUser(data.user));
+      return { ok: true };
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+
   const value = useMemo(
-    () => ({ user: user ?? null, signUp, signIn, signOut }),
+    () => ({ user: user ?? null, signUp, signIn, signOut, updateProfile }),
     [user, signUp, signIn, signOut],
   );
 

@@ -63,6 +63,26 @@ const NAV_ITEMS = [
     ),
   },
   {
+    href: "/profile",
+    label: "マイページ",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" width="18" height="18">
+        <circle cx="10" cy="7" r="3" />
+        <path d="M4 17c0-3.314 2.686-6 6-6s6 2.686 6 6" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    href: "/admin",
+    label: "ユーザー管理",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" width="18" height="18">
+        <path d="M13 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM4 17c0-2.761 2.686-5 6-5s6 2.239 6 5" strokeLinecap="round" />
+        <path d="M16 8v4M14 10h4" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
     href: "/settings",
     label: "設定",
     icon: (
