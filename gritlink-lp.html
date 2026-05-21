@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GritLink – サボれない環境が、あなたを変える。</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- ── SVG ICON LIBRARY ── -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <defs>
+    <!-- Logo rings -->
+    <symbol id="ic-logo" viewBox="0 0 36 36">
+      <circle cx="13" cy="18" r="7" fill="none" stroke="#C06070" stroke-width="3"/>
+      <circle cx="23" cy="18" r="7" fill="none" stroke="#4A7FA5" stroke-width="3"/>
+    </symbol>
+    <!-- Lock -->
+    <symbol id="ic-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="5" y="11" width="14" height="10" rx="2.5"/>
+      <path d="M8 11V7a4 4 0 018 0v4"/>
+      <circle cx="12" cy="16.5" r="1.5" fill="currentColor" stroke="none"/>
+    </symbol>
+    <!-- Camera -->
+    <symbol id="ic-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+      <circle cx="12" cy="13" r="4"/>
+    </symbol>
+    <!-- Users -->
+    <symbol id="ic-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+    </symbol>
+    <!-- Feed / grid -->
+    <symbol id="ic-feed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+      <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+      <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+      <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+    </symbol>
+    <!-- Gift -->
+    <symbol id="ic-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 12 20 22 4 22 4 12"/>
+      <rect x="2" y="7" width="20" height="5" rx="1"/>
+      <line x1="12" y1="22" x2="12" y2="7"/>
+      <path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/>
+      <path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/>
+    </symbol>
+    <!-- Chart -->
+    <symbol id="ic-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="20" x2="18" y2="10"/>
+      <line x1="12" y1="20" x2="12" y2="4"/>
+      <line x1="6" y1="20" x2="6" y2="14"/>
+      <line x1="2" y1="20" x2="22" y2="20"/>
+    </symbol>
+    <!-- Star filled -->
+    <symbol id="ic-star" viewBox="0 0 24 24">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+    </symbol>
+    <!-- Flame -->
+    <symbol id="ic-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/>
+    </symbol>
+    <!-- Heart -->
+    <symbol id="ic-heart" viewBox="0 0 24 24">
+      <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" fill="currentColor"/>
+    </symbol>
+    <!-- Heart outline -->
+    <symbol id="ic-heart-o" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+    </symbol>
+    <!-- Comment -->
+    <symbol id="ic-comment" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+    </symbol>
+    <!-- Pin -->
+    <symbol id="ic-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </symbol>
+    <!-- Phone -->
+    <symbol id="ic-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="5" y="2" width="14" height="20" rx="2.5"/>
+      <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2"/>
+    </symbol>
+    <!-- Check circle -->
+    <symbol id="ic-check" viewBox="0 0 20 20">
+      <circle cx="10" cy="10" r="10" fill="currentColor" opacity=".15"/>
+      <polyline points="6,10 9,13 14,7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Arrow right -->
+    <symbol id="ic-arrow-r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12"/>
+      <polyline points="12 5 19 12 12 19"/>
+    </symbol>
+    <!-- Home -->
+    <symbol id="ic-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+      <polyline points="9 22 9 12 15 12 15 22"/>
+    </symbol>
+    <!-- Bell -->
+    <symbol id="ic-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/>
+    </symbol>
+    <!-- User single -->
+    <symbol id="ic-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+      <circle cx="12" cy="7" r="4"/>
+    </symbol>
+    <!-- Video -->
+    <symbol id="ic-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="23 7 16 12 23 17 23 7"/>
+      <rect x="1" y="5" width="15" height="14" rx="2"/>
+    </symbol>
+    <!-- Shield check -->
+    <symbol id="ic-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <polyline points="9 12 11 14 15 10"/>
+    </symbol>
+    <!-- Plus -->
+    <symbol id="ic-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="12" y1="5" x2="12" y2="19"/>
+      <line x1="5" y1="12" x2="19" y2="12"/>
+    </symbol>
+    <!-- Apple logo simplified -->
+    <symbol id="ic-apple" viewBox="0 0 24 24">
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="currentColor"/>
+    </symbol>
+    <!-- Google Play triangle -->
+    <symbol id="ic-play" viewBox="0 0 24 24">
+      <path d="M5 3l14 9-14 9V3z" fill="currentColor"/>
+    </symbol>
+    <!-- Sparkle / star small -->
+    <symbol id="ic-sparkle" viewBox="0 0 24 24">
+      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+    </symbol>
+    <!-- Book / study -->
+    <symbol id="ic-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+    </symbol>
+    <!-- Running -->
+    <symbol id="ic-run" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="13" cy="4" r="2"/>
+      <path d="M5 21l3.5-5.5L12 18l2.5-4L18 17"/>
+      <path d="M8 11.5l2.5-4.5 4 2.5 2.5-3"/>
+    </symbol>
+    <!-- Pen / exam -->
+    <symbol id="ic-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+    </symbol>
+    <!-- Handshake / partner -->
+    <symbol id="ic-handshake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.42 4.58a5.4 5.4 0 00-7.65 0l-.77.78-.77-.78a5.4 5.4 0 00-7.65 0 5.4 5.4 0 000 7.65l8.42 8.42 8.42-8.42a5.4 5.4 0 000-7.65z"/>
+    </symbol>
+    <!-- Warning / alert -->
+    <symbol id="ic-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+      <line x1="12" y1="9" x2="12" y2="13"/>
+      <line x1="12" y1="17" x2="12.01" y2="17"/>
+    </symbol>
+    <!-- Zap -->
+    <symbol id="ic-zap" viewBox="0 0 24 24">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" opacity=".15" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<style>
+  :root {
+    /* Muted, editorial palette */
+    --rose:        #B85C6C;
+    --rose-mid:    #CFA0A8;
+    --rose-pale:   #F8F1F2;
+    --rose-border: #E8C8CC;
+
+    --steel:       #4A7FA5;
+    --steel-mid:   #94B8D0;
+    --steel-pale:  #F0F5FA;
+    --steel-border:#C0D8EC;
+
+    --sage:        #4D9070;
+    --sage-mid:    #8CC4A8;
+    --sage-pale:   #F0F8F4;
+    --sage-border: #B4D8C8;
+
+    --ink:         #1A1F2E;
+    --graphite:    #3D4960;
+    --mist:        #7A8799;
+    --silver:      #A8B4C0;
+
+    --border:      #E4E2DC;
+    --border-soft: #EDEBE6;
+
+    --bg:          #FCFBF9;
+    --bg-alt:      #F5F3EF;
+    --bg-card:     #FFFFFF;
+
+    --radius-sm:  10px;
+    --radius-md:  16px;
+    --radius-lg:  24px;
+    --radius-xl:  32px;
+
+    --shadow-xs: 0 1px 3px rgba(26,31,46,.06);
+    --shadow-sm: 0 2px 8px rgba(26,31,46,.08);
+    --shadow-md: 0 8px 24px rgba(26,31,46,.09);
+    --shadow-lg: 0 20px 48px rgba(26,31,46,.10);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    font-family:'Noto Sans JP','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  svg.icon {
+    display:inline-block;
+    vertical-align:middle;
+    flex-shrink:0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 48px;
+    background:rgba(252,251,249,.88);
+    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+    transition:box-shadow .3s;
+  }
+
+  .logo {
+    display:flex; align-items:center; gap:10px;
+    font-size:20px; font-weight:800; color:var(--ink);
+    text-decoration:none; letter-spacing:-.4px;
+  }
+
+  .logo-icon-wrap {
+    width:34px; height:34px;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a {
+    text-decoration:none; color:var(--mist);
+    font-size:14px; font-weight:500;
+    transition:color .2s;
+  }
+  .nav-links a:hover { color:var(--ink); }
+
+  .nav-cta { display:flex; align-items:center; gap:10px; }
+
+  .btn {
+    display:inline-flex; align-items:center; gap:6px;
+    padding:10px 22px; border-radius:50px;
+    font-size:13px; font-weight:700;
+    cursor:pointer; transition:all .25s;
+    text-decoration:none; border:none;
+    font-family:inherit;
+  }
+
+  .btn-ghost {
+    background:transparent;
+    border:1px solid var(--border);
+    color:var(--graphite);
+  }
+  .btn-ghost:hover { border-color:var(--rose); color:var(--rose); }
+
+  .btn-rose {
+    background:var(--rose);
+    color:#fff;
+    box-shadow:0 3px 12px rgba(184,92,108,.28);
+  }
+  .btn-rose:hover { background:#a5536a; transform:translateY(-1px); box-shadow:0 6px 20px rgba(184,92,108,.34); }
+
+  .btn-steel {
+    background:var(--steel);
+    color:#fff;
+    box-shadow:0 3px 12px rgba(74,127,165,.28);
+  }
+  .btn-steel:hover { background:#3d6e92; transform:translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height:100vh;
+    display:flex; align-items:center;
+    padding:120px 48px 80px;
+    background:var(--bg);
+    position:relative; overflow:hidden;
+  }
+
+  /* Subtle textured background */
+  .hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 600px 400px at 80% 20%, rgba(184,92,108,.06) 0%, transparent 70%),
+      radial-gradient(ellipse 500px 400px at 10% 80%, rgba(74,127,165,.05) 0%, transparent 70%);
+    pointer-events:none;
+  }
+
+  .hero-inner {
+    max-width:1200px; margin:0 auto;
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:80px; align-items:center; width:100%;
+    position:relative;
+  }
+
+  .hero-eyebrow {
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:11px; font-weight:700; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--rose);
+    margin-bottom:20px;
+  }
+  .eyebrow-dot {
+    width:6px; height:6px; border-radius:50%; background:var(--rose);
+  }
+
+  .hero-title {
+    font-size:clamp(32px,4vw,52px);
+    font-weight:900; line-height:1.18;
+    color:var(--ink); margin-bottom:16px;
+    letter-spacing:-1.5px;
+  }
+
+  .hero-title .underline-rose {
+    position:relative; display:inline-block;
+    color:var(--rose);
+  }
+  .hero-title .underline-rose::after {
+    content:'';
+    position:absolute; bottom:-2px; left:0; right:0;
+    height:2px;
+    background:linear-gradient(90deg,var(--rose),var(--rose-mid),transparent);
+    border-radius:1px;
+  }
+
+  .hero-sub {
+    font-size:15px; color:var(--mist);
+    line-height:1.9; margin-bottom:32px;
+    font-weight:400;
+  }
+
+  .hero-pill-row {
+    display:flex; flex-wrap:wrap; gap:10px;
+    margin-bottom:32px;
+  }
+
+  .pill {
+    display:inline-flex; align-items:center; gap:7px;
+    background:var(--bg-card); border:1px solid var(--border);
+    padding:8px 14px; border-radius:50px;
+    font-size:13px; font-weight:500; color:var(--graphite);
+    box-shadow:var(--shadow-xs);
+  }
+  .pill svg.icon { color:var(--rose); }
+
+  .hero-ctas { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:36px; }
+
+  .store-row { display:flex; gap:10px; }
+
+  .store-btn {
+    display:flex; align-items:center; gap:10px;
+    background:var(--ink); color:#fff;
+    padding:10px 18px; border-radius:10px;
+    text-decoration:none; transition:all .2s;
+    border:1px solid transparent;
+  }
+  .store-btn:hover { background:#2d3550; transform:translateY(-1px); box-shadow:var(--shadow-sm); }
+  .store-btn .s-label { font-size:9px; opacity:.6; font-weight:400; }
+  .store-btn .s-name { font-size:13px; font-weight:700; margin-top:1px; }
+  .store-btn .s-text { display:flex; flex-direction:column; }
+
+  /* ── HERO VISUAL ── */
+  .hero-visual {
+    position:relative; height:540px;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  .phone-frame {
+    width:230px;
+    background:#1A1F2E;
+    border-radius:40px;
+    padding:14px 8px;
+    box-shadow:
+      0 40px 80px rgba(26,31,46,.22),
+      0 0 0 1px rgba(255,255,255,.07) inset,
+      0 1px 0 rgba(255,255,255,.12) inset;
+    position:relative; z-index:2;
+    animation:phoneFloat 5s ease-in-out infinite;
+  }
+  @keyframes phoneFloat {
+    0%,100% { transform:translateY(0) rotate(-1deg); }
+    50%      { transform:translateY(-10px) rotate(-1deg); }
+  }
+
+  .phone-dynamic-island {
+    width:72px; height:22px;
+    background:#0d1016;
+    border-radius:11px;
+    margin:0 auto 10px;
+  }
+
+  .phone-screen-inner {
+    background:var(--bg);
+    border-radius:28px;
+    overflow:hidden;
+    height:420px;
+    position:relative;
+  }
+
+  /* Lock screen content */
+  .ls-feed-bg {
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; gap:5px; padding:8px;
+  }
+  .ls-feed-row {
+    display:flex; gap:5px;
+  }
+  .ls-feed-cell {
+    flex:1; border-radius:6px;
+    background:linear-gradient(135deg,#E8E4DC,#DDD8CE);
+  }
+
+  .ls-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(180deg,
+      rgba(252,251,249,.1) 0%,
+      rgba(252,251,249,.82) 35%,
+      rgba(252,251,249,.95) 100%);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    gap:10px;
+  }
+
+  .ls-lock-icon {
+    width:48px; height:48px;
+    background:var(--rose-pale);
+    border-radius:14px;
+    border:1px solid var(--rose-border);
+    display:flex; align-items:center; justify-content:center;
+    animation:lockShake 4s ease-in-out infinite;
+  }
+  @keyframes lockShake {
+    0%,88%,100% { transform:rotate(0); }
+    91% { transform:rotate(-8deg); }
+    95% { transform:rotate(8deg); }
+    98% { transform:rotate(-4deg); }
+  }
+
+  .ls-locked-word {
+    font-size:34px; font-weight:900;
+    color:var(--rose); letter-spacing:-1px;
+    font-style:italic;
+  }
+
+  .ls-hint {
+    font-size:9px; color:var(--mist); text-align:center;
+    padding:0 20px; line-height:1.5;
+  }
+
+  .ls-task {
+    background:var(--bg-card);
+    border:1px solid var(--rose-border);
+    border-radius:10px;
+    padding:8px 14px; text-align:center;
+    box-shadow:var(--shadow-sm);
+    width:85%;
+  }
+  .ls-task-label {
+    font-size:8px; font-weight:800; color:var(--rose);
+    letter-spacing:1px; text-transform:uppercase;
+    display:flex; align-items:center; gap:4px; justify-content:center;
+  }
+  .ls-task-name {
+    font-size:10px; color:var(--graphite);
+    font-weight:600; margin-top:3px;
+  }
+
+  /* Floating info cards */
+  .f-card {
+    position:absolute;
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:12px 16px;
+    box-shadow:var(--shadow-md);
+    display:flex; align-items:center; gap:10px;
+    white-space:nowrap;
+    z-index:10;
+  }
+  .f-card .f-icon {
+    width:36px; height:36px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .f-card .f-val { font-size:16px; font-weight:800; color:var(--ink); }
+  .f-card .f-sub { font-size:10px; color:var(--mist); margin-top:1px; }
+
+  .fc-users { top:40px; left:-88px; animation:fc1 4s ease-in-out infinite; }
+  .fc-rating { bottom:90px; right:-96px; animation:fc2 4s ease-in-out infinite .7s; }
+  .fc-streak { top:46%; left:-110px; animation:fc3 4s ease-in-out infinite 1.4s; }
+  @keyframes fc1 { 0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)} }
+  @keyframes fc2 { 0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)} }
+  @keyframes fc3 { 0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)} }
+
+  /* ── SECTION SHELL ── */
+  section { padding:100px 48px; }
+  .section-in { max-width:1200px; margin:0 auto; }
+
+  .sec-tag {
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:11px; font-weight:700; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--rose);
+    margin-bottom:14px;
+  }
+
+  .sec-title {
+    font-size:clamp(26px,3vw,42px);
+    font-weight:900; color:var(--ink);
+    letter-spacing:-.8px; line-height:1.2;
+    margin-bottom:14px;
+  }
+
+  .sec-sub {
+    font-size:15px; color:var(--mist);
+    line-height:1.85; max-width:520px;
+  }
+
+  /* ── WHY SECTION ── */
+  .sec-why { background:var(--bg-alt); }
+
+  .why-grid {
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:16px; margin-top:56px;
+  }
+
+  .why-card {
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:28px 22px;
+    transition:all .3s ease;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .why-card:hover {
+    transform:translateY(-4px);
+    box-shadow:var(--shadow-md);
+    border-color:transparent;
+  }
+
+  .why-icon {
+    width:48px; height:48px; border-radius:13px;
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--border);
+  }
+
+  .why-title { font-size:14px; font-weight:700; color:var(--ink); line-height:1.4; }
+  .why-desc  { font-size:13px; color:var(--mist); line-height:1.7; }
+
+  /* ── FEATURES ── */
+  .feature-tabs {
+    display:flex; gap:8px; justify-content:center;
+    flex-wrap:wrap; margin-bottom:52px;
+  }
+
+  .tab-btn {
+    display:flex; align-items:center; gap:8px;
+    padding:9px 18px; border-radius:50px;
+    border:1px solid var(--border);
+    background:var(--bg-card); color:var(--mist);
+    font-size:12px; font-weight:600;
+    cursor:pointer; transition:all .25s;
+    font-family:inherit;
+  }
+  .tab-btn:hover { border-color:var(--rose); color:var(--rose); }
+  .tab-btn.active {
+    background:var(--rose); border-color:var(--rose);
+    color:#fff;
+    box-shadow:0 3px 14px rgba(184,92,108,.3);
+  }
+
+  .tab-num {
+    width:18px; height:18px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:10px; font-weight:800;
+    background:rgba(255,255,255,.22);
+  }
+  .tab-btn:not(.active) .tab-num {
+    background:var(--bg-alt); color:var(--mist);
+  }
+
+  .feature-panel { display:none; }
+  .feature-panel.active {
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:80px; align-items:center;
+    max-width:1000px; margin:0 auto;
+  }
+
+  .fp-info { display:flex; flex-direction:column; gap:18px; }
+
+  .fp-num {
+    font-size:72px; font-weight:900;
+    line-height:1; letter-spacing:-3px;
+    color:var(--rose-pale); -webkit-text-stroke:1px var(--rose-mid);
+  }
+  .fp-num.steel { color:var(--steel-pale); -webkit-text-stroke:1px var(--steel-mid); }
+  .fp-num.sage  { color:var(--sage-pale);  -webkit-text-stroke:1px var(--sage-mid);  }
+
+  .fp-title {
+    font-size:26px; font-weight:900;
+    color:var(--ink); letter-spacing:-.5px;
+    line-height:1.2;
+  }
+  .fp-desc { font-size:14px; color:var(--mist); line-height:1.85; }
+
+  .fp-points { display:flex; flex-direction:column; gap:10px; margin-top:4px; }
+  .fp-point {
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:13px; color:var(--graphite); font-weight:500;
+    line-height:1.5;
+  }
+  .fp-dot {
+    width:7px; height:7px; border-radius:50%;
+    background:var(--rose); margin-top:5px; flex-shrink:0;
+  }
+  .fp-dot.steel { background:var(--steel); }
+  .fp-dot.sage  { background:var(--sage);  }
+
+  /* ── PHONE MOCK SHARED ── */
+  .mock-wrap { display:flex; justify-content:center; align-items:center; }
+
+  .mock-device {
+    width:210px;
+    background:#1A1F2E;
+    border-radius:36px;
+    padding:12px 7px;
+    box-shadow:
+      0 28px 60px rgba(26,31,46,.24),
+      0 0 0 1px rgba(255,255,255,.06) inset;
+    position:relative;
+  }
+  .mock-di {
+    width:64px; height:20px;
+    background:#0d1016;
+    border-radius:10px;
+    margin:0 auto 8px;
+  }
+  .mock-screen {
+    background:var(--bg);
+    border-radius:24px;
+    overflow:hidden;
+    height:370px;
+    display:flex; flex-direction:column;
+  }
+  .mock-status-bar {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:6px 12px 4px;
+    font-size:9px; font-weight:700; color:var(--ink);
+    background:var(--bg);
+    flex-shrink:0;
+  }
+  .mock-status-right {
+    display:flex; align-items:center; gap:4px;
+  }
+  /* Signal bars */
+  .signal-bars {
+    display:flex; align-items:flex-end; gap:1.5px;
+  }
+  .signal-bars span {
+    display:block; width:3px; background:var(--ink); border-radius:1px;
+  }
+  .signal-bars span:nth-child(1){height:4px;}
+  .signal-bars span:nth-child(2){height:6px;}
+  .signal-bars span:nth-child(3){height:9px;}
+  /* Battery */
+  .battery {
+    display:flex; align-items:center; gap:1px;
+  }
+  .battery-body {
+    width:18px; height:9px;
+    border:1.5px solid var(--ink);
+    border-radius:2px; position:relative; overflow:hidden;
+  }
+  .battery-fill {
+    position:absolute; inset:1.5px;
+    background:var(--ink);
+    width:70%; border-radius:1px;
+  }
+  .battery-tip {
+    width:2px; height:5px;
+    background:var(--ink);
+    border-radius:0 1px 1px 0;
+  }
+
+  /* ── MOCK 1: Lock ── */
+  .m1-body { flex:1; position:relative; overflow:hidden; }
+  .m1-feed {
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; gap:5px; padding:6px;
+  }
+  .m1-feed-item {
+    height:52px; border-radius:6px;
+    background:var(--border); flex-shrink:0;
+    animation:shimmer 2s ease-in-out infinite;
+    background:linear-gradient(90deg,#E8E4DC 25%,#F0EDE7 50%,#E8E4DC 75%);
+    background-size:200% 100%;
+  }
+  @keyframes shimmer {
+    0%{background-position:200% 0}100%{background-position:-200% 0}
+  }
+  .m1-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(180deg,
+      rgba(252,251,249,.05) 0%,
+      rgba(252,251,249,.78) 30%,
+      rgba(252,251,249,.96) 100%);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:10px;
+  }
+  .m1-lock-box {
+    width:44px; height:44px; border-radius:13px;
+    background:var(--rose-pale); border:1px solid var(--rose-border);
+    display:flex; align-items:center; justify-content:center;
+    animation:lockShake 4s ease-in-out infinite;
+  }
+  .m1-locked { font-size:30px; font-weight:900; color:var(--rose); letter-spacing:-.5px; font-style:italic; }
+  .m1-sub { font-size:9px; color:var(--mist); text-align:center; padding:0 16px; line-height:1.5; }
+  .m1-task {
+    background:var(--bg-card);
+    border:1px solid var(--rose-border);
+    border-radius:9px; padding:7px 12px;
+    width:80%; box-shadow:var(--shadow-sm);
+  }
+  .m1-task-lbl {
+    font-size:8px; font-weight:800; color:var(--rose);
+    letter-spacing:.8px; text-transform:uppercase;
+    display:flex; align-items:center; gap:3px;
+  }
+  .m1-task-name { font-size:10px; color:var(--graphite); font-weight:600; margin-top:2px; }
+
+  .m1-nav {
+    display:flex; justify-content:space-around; align-items:center;
+    padding:8px 0 6px;
+    border-top:1px solid var(--border);
+    background:var(--bg-card); flex-shrink:0;
+  }
+  .m1-nav-item { color:var(--silver); }
+  .m1-nav-item.act { color:var(--rose); }
+
+  /* ── MOCK 2: Camera ── */
+  .m2-body { flex:1; display:flex; flex-direction:column; }
+  .cam-grid { display:grid; grid-template-rows:1fr 1fr; flex:1; }
+  .cam-half {
+    position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cam-a { background:linear-gradient(160deg,#1C2235,#242C44); }
+  .cam-b { background:linear-gradient(160deg,#0F1420,#1A1F2E); }
+
+  .cam-illustration {
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+  }
+  .cam-face {
+    width:40px; height:40px; border-radius:50%;
+    background:rgba(255,255,255,.12);
+    border:2px solid rgba(255,255,255,.18);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cam-face-inner {
+    width:26px; height:26px; border-radius:50%;
+    background:rgba(255,255,255,.2);
+  }
+  .cam-env-rows {
+    display:flex; flex-direction:column; gap:4px; width:60px;
+  }
+  .cam-env-row {
+    height:5px; border-radius:3px;
+    background:rgba(255,255,255,.15);
+  }
+  .cam-env-row:nth-child(2) { width:75%; }
+  .cam-env-row:nth-child(3) { width:50%; }
+
+  .cam-tag {
+    position:absolute; top:7px; left:7px;
+    background:rgba(0,0,0,.45); color:rgba(255,255,255,.85);
+    font-size:7.5px; font-weight:700;
+    padding:2.5px 7px; border-radius:50px;
+    backdrop-filter:blur(4px);
+  }
+  .cam-ts {
+    position:absolute; bottom:7px; right:7px;
+    background:rgba(0,0,0,.45); color:rgba(255,255,255,.7);
+    font-size:7.5px; padding:2px 6px; border-radius:50px;
+    backdrop-filter:blur(4px);
+  }
+
+  .m2-meta {
+    padding:7px 10px; background:var(--bg-card);
+    border-top:1px solid var(--border);
+    display:flex; flex-direction:column; gap:3px; flex-shrink:0;
+  }
+  .m2-meta-row {
+    display:flex; align-items:center; gap:5px;
+    font-size:9px; color:var(--mist); font-weight:500;
+  }
+
+  .m2-btns {
+    display:flex; gap:6px;
+    padding:7px 10px; background:var(--bg-card);
+    border-top:1px solid var(--border); flex-shrink:0;
+  }
+  .m2-btn-re {
+    flex:1; padding:7px 0;
+    border-radius:8px; border:1px solid var(--border);
+    background:var(--bg); font-size:10px; font-weight:700;
+    cursor:pointer; color:var(--graphite); font-family:inherit;
+    transition:all .2s;
+  }
+  .m2-btn-re:hover { border-color:var(--steel); color:var(--steel); }
+
+  .m2-btn-post {
+    flex:2; padding:7px 0;
+    border-radius:8px; border:none;
+    background:var(--steel); color:#fff;
+    font-size:10px; font-weight:700;
+    cursor:pointer; font-family:inherit;
+    box-shadow:0 3px 10px rgba(74,127,165,.3);
+    display:flex; align-items:center; justify-content:center; gap:4px;
+    transition:all .2s;
+  }
+  .m2-btn-post:hover { background:#3d6e92; }
+
+  /* ── MOCK 3: 2-Shot Room ── */
+  .m3-body { flex:1; display:flex; flex-direction:column; }
+  .m3-header {
+    padding:7px 10px; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between;
+    background:var(--bg-card); flex-shrink:0;
+  }
+  .m3-title { font-size:10px; font-weight:800; color:var(--ink); }
+  .m3-online { font-size:9px; color:var(--sage); font-weight:600; }
+
+  .m3-grid { display:grid; grid-template-rows:1fr 1fr; flex:1; }
+  .m3-slot {
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+    padding:14px;
+    background:var(--bg);
+  }
+  .m3-slot:first-child { border-bottom:1px solid var(--border); }
+
+  .m3-avatar-group {
+    display:flex; flex-direction:column; align-items:center; gap:7px;
+  }
+
+  .m3-ring {
+    border-radius:50%; padding:3px;
+    position:relative;
+  }
+  .m3-ring-green {
+    background:conic-gradient(var(--sage) 0% 100%);
+    box-shadow:0 0 0 2px var(--bg), 0 0 12px rgba(77,144,112,.3);
+  }
+  .m3-ring-rose {
+    background:conic-gradient(var(--rose) 0% 55%, var(--border) 55% 100%);
+    box-shadow:0 0 0 2px var(--bg), 0 0 12px rgba(184,92,108,.25);
+  }
+
+  .m3-avatar {
+    width:60px; height:60px; border-radius:50%;
+    background:var(--bg-card);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .m3-face {
+    width:36px; height:36px; border-radius:50%;
+    border:2px solid var(--border);
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:2px;
+    overflow:hidden;
+  }
+  /* Mini face illustration */
+  .m3-face-green { background:linear-gradient(160deg,#7DC4A0,#4D9070); }
+  .m3-face-rose  { background:linear-gradient(160deg,#D4909A,#B85C6C); }
+
+  .m3-name { font-size:11px; font-weight:800; color:var(--ink); }
+
+  .status-pill {
+    display:flex; align-items:center; gap:4px;
+    padding:3px 9px; border-radius:50px;
+    font-size:9px; font-weight:700;
+  }
+  .sp-green { background:var(--sage-pale); color:var(--sage); border:1px solid var(--sage-border); }
+  .sp-rose  { background:var(--rose-pale); color:var(--rose); border:1px solid var(--rose-border); animation:rosePulse 1.8s ease-in-out infinite; }
+  @keyframes rosePulse { 0%,100%{opacity:1}50%{opacity:.5} }
+  .sp-dot { width:5px; height:5px; border-radius:50%; }
+  .sp-green .sp-dot { background:var(--sage); }
+  .sp-rose  .sp-dot { background:var(--rose); }
+
+  .m3-actions {
+    position:absolute; bottom:8px; right:8px;
+    display:flex; gap:5px;
+  }
+  .m3-act-btn {
+    width:26px; height:26px; border-radius:7px;
+    background:var(--bg-card); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; color:var(--mist);
+    transition:all .2s;
+  }
+  .m3-act-btn:hover { color:var(--rose); border-color:var(--rose-border); }
+
+  .m3-footer {
+    padding:7px 10px; display:flex; gap:6px;
+    border-top:1px solid var(--border);
+    background:var(--bg-card); flex-shrink:0;
+  }
+  .m3-foot-btn {
+    flex:1; padding:7px 0;
+    border-radius:8px; border:1px solid var(--border);
+    background:var(--bg); font-size:10px; font-weight:700;
+    cursor:pointer; color:var(--graphite); font-family:inherit;
+    display:flex; align-items:center; justify-content:center; gap:4px;
+    transition:all .2s;
+  }
+  .m3-foot-btn:hover { border-color:var(--rose-border); color:var(--rose); }
+
+  /* ── MOCK 4: Timeline ── */
+  .m4-body { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+
+  .m4-alert {
+    background:var(--rose); color:#fff;
+    padding:7px 10px;
+    display:flex; align-items:flex-start; gap:6px;
+    font-size:9px; font-weight:600; line-height:1.45;
+    flex-shrink:0; cursor:pointer;
+    transition:background .2s;
+  }
+  .m4-alert:hover { background:#a5536a; }
+  .m4-alert-icon { flex-shrink:0; margin-top:1px; }
+  .m4-alert-arrow { margin-left:auto; font-size:14px; font-weight:300; }
+
+  .m4-feed { flex:1; overflow-y:auto; display:flex; flex-direction:column; }
+  .m4-item { border-bottom:1px solid var(--border-soft); }
+
+  .m4-item-hd {
+    display:flex; align-items:center; gap:7px;
+    padding:7px 9px 5px;
+  }
+  .m4-ava {
+    width:28px; height:28px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .m4-ava-a { background:linear-gradient(135deg,#7DC4A0,#4D9070); }
+  .m4-ava-b { background:linear-gradient(135deg,#94B8D0,#4A7FA5); }
+  .m4-user-info { flex:1; }
+  .m4-uname { font-size:10px; font-weight:700; color:var(--ink); }
+  .m4-uloc  { font-size:8.5px; color:var(--mist); margin-top:1px; }
+  .m4-utime { font-size:8.5px; color:var(--silver); }
+
+  .m4-photo {
+    width:100%; height:88px;
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  .m4-photo-a {
+    background:linear-gradient(135deg,#C4D8E8 0%,#A0BECE 100%);
+  }
+  .m4-photo-b {
+    background:linear-gradient(135deg,#D8C4CC 0%,#C4A0AC 100%);
+  }
+
+  /* Abstract photo illustrations */
+  .photo-abstract {
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .photo-desk {
+    display:flex; flex-direction:column; align-items:center; gap:4px; opacity:.7;
+  }
+  .photo-desk-top {
+    width:50px; height:30px;
+    background:rgba(255,255,255,.4); border-radius:3px;
+    border:1px solid rgba(255,255,255,.5);
+  }
+  .photo-desk-lines {
+    display:flex; flex-direction:column; gap:2px; width:42px; margin-top:2px;
+  }
+  .photo-desk-line {
+    height:3px; background:rgba(255,255,255,.35); border-radius:2px;
+  }
+  .photo-desk-line:nth-child(2){width:70%}
+  .photo-desk-line:nth-child(3){width:50%}
+
+  .photo-tag {
+    position:absolute; bottom:5px; left:6px;
+    background:rgba(26,31,46,.35); color:rgba(255,255,255,.9);
+    font-size:7.5px; padding:2px 6px; border-radius:4px;
+    backdrop-filter:blur(4px); font-weight:600;
+  }
+
+  .m4-actions {
+    display:flex; align-items:center; gap:12px;
+    padding:6px 10px 7px;
+  }
+  .m4-action {
+    display:flex; align-items:center; gap:4px;
+    font-size:9.5px; color:var(--mist); font-weight:600;
+    cursor:pointer; transition:color .2s;
+  }
+  .m4-action:hover { color:var(--rose); }
+  .m4-action.liked { color:var(--rose); }
+
+  /* ── PRICING ── */
+  .sec-pricing { background:var(--bg-alt); }
+
+  .pricing-grid {
+    display:grid; grid-template-columns:repeat(3,1fr);
+    gap:20px; margin-top:56px; align-items:start;
+  }
+
+  .price-card {
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:30px 26px;
+    position:relative;
+    transition:all .3s;
+    display:flex; flex-direction:column; gap:22px;
+  }
+  .price-card:hover {
+    transform:translateY(-4px); box-shadow:var(--shadow-md);
+    border-color:transparent;
+  }
+  .price-card.feat {
+    border-color:var(--rose);
+    box-shadow:0 6px 24px rgba(184,92,108,.12);
+    transform:translateY(-8px);
+  }
+  .price-card.feat:hover {
+    transform:translateY(-12px);
+    box-shadow:0 16px 40px rgba(184,92,108,.16);
+  }
+
+  .feat-tag {
+    position:absolute; top:-1px; right:22px;
+    background:var(--rose); color:#fff;
+    font-size:10px; font-weight:800;
+    padding:5px 14px 7px;
+    border-radius:0 0 9px 9px;
+    letter-spacing:.4px;
+  }
+
+  .plan-name { font-size:11px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--mist); }
+  .plan-price { display:flex; align-items:baseline; gap:3px; margin-top:6px; }
+  .plan-cur { font-size:20px; font-weight:700; color:var(--ink); }
+  .plan-num { font-size:46px; font-weight:900; color:var(--ink); letter-spacing:-2px; line-height:1; }
+  .plan-num.rose { color:var(--rose); }
+  .plan-per { font-size:12px; color:var(--mist); margin-left:2px; }
+
+  .plan-desc {
+    font-size:13px; color:var(--mist); line-height:1.7;
+    padding-top:18px; border-top:1px solid var(--border);
+  }
+
+  .plan-features { display:flex; flex-direction:column; gap:10px; }
+  .plan-feat {
+    display:flex; align-items:center; gap:9px;
+    font-size:13px; color:var(--graphite); font-weight:500;
+  }
+
+  .plan-cta {
+    width:100%; padding:13px 0;
+    border-radius:var(--radius-sm);
+    font-size:13px; font-weight:700;
+    cursor:pointer; border:none; transition:all .25s;
+    text-align:center; font-family:inherit;
+  }
+  .cta-outline { background:var(--bg); border:1px solid var(--border); color:var(--graphite); }
+  .cta-outline:hover { border-color:var(--rose); color:var(--rose); }
+  .cta-rose {
+    background:var(--rose); color:#fff;
+    box-shadow:0 3px 12px rgba(184,92,108,.28);
+  }
+  .cta-rose:hover { background:#a5536a; transform:translateY(-1px); box-shadow:0 6px 18px rgba(184,92,108,.35); }
+  .cta-steel { background:var(--steel-pale); color:var(--steel); border:1px solid var(--steel-border); }
+  .cta-steel:hover { background:var(--steel); color:#fff; }
+
+  /* ── STATS ── */
+  .sec-stats {
+    background:var(--ink); color:#fff;
+  }
+
+  .stats-grid {
+    display:grid; grid-template-columns:repeat(3,1fr);
+    gap:48px; margin-top:56px;
+  }
+
+  .stat-item { display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center; }
+
+  .stat-icon-wrap {
+    width:64px; height:64px; border-radius:18px;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.1);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:4px;
+  }
+
+  .stat-num {
+    font-size:50px; font-weight:900; letter-spacing:-2px;
+    color:#fff; line-height:1;
+  }
+  .stat-label { font-size:13px; color:rgba(255,255,255,.44); font-weight:400; }
+
+  /* ── TARGET ── */
+  .target-grid {
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:16px; margin-top:56px;
+  }
+
+  .target-card {
+    background:var(--bg-card); border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    padding:24px 18px; text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:12px;
+    transition:all .3s;
+  }
+  .target-card:hover {
+    background:var(--rose-pale);
+    border-color:var(--rose-border);
+    transform:translateY(-4px); box-shadow:var(--shadow-sm);
+  }
+  .target-card:hover .target-icon-wrap { background:rgba(184,92,108,.12); }
+
+  .target-icon-wrap {
+    width:52px; height:52px; border-radius:14px;
+    background:var(--bg-alt);
+    display:flex; align-items:center; justify-content:center;
+    transition:background .3s;
+  }
+  .target-label { font-size:13px; font-weight:700; color:var(--ink); line-height:1.5; }
+
+  /* ── QUOTE SECTION ── */
+  .sec-quote {
+    background:var(--bg);
+    text-align:center; padding:80px 48px;
+  }
+  .quote-text {
+    font-size:clamp(20px,2.5vw,32px);
+    font-weight:700; color:var(--graphite);
+    line-height:1.65; max-width:640px; margin:0 auto;
+    letter-spacing:-.3px;
+  }
+  .quote-text em { color:var(--rose); font-style:normal; font-weight:900; }
+
+  /* ── CTA SECTION ── */
+  .sec-cta {
+    background:var(--bg-alt);
+    text-align:center; padding:120px 48px;
+    position:relative; overflow:hidden;
+  }
+  .sec-cta::before {
+    content:'';
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse 700px 500px at 50% 50%,rgba(184,92,108,.05) 0%,transparent 70%);
+    pointer-events:none;
+  }
+
+  .cta-eyebrow {
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:11px; font-weight:700; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--rose);
+    margin-bottom:18px;
+  }
+  .cta-title {
+    font-size:clamp(28px,4vw,50px);
+    font-weight:900; color:var(--ink);
+    letter-spacing:-1.5px; margin-bottom:14px;
+    line-height:1.15;
+  }
+  .cta-sub { font-size:15px; color:var(--mist); margin-bottom:36px; }
+
+  .cta-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:20px; }
+
+  .cta-btn-big {
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 34px; border-radius:50px;
+    font-size:15px; font-weight:800;
+    cursor:pointer; border:none; font-family:inherit;
+    transition:all .3s;
+    text-decoration:none;
+  }
+  .cbb-rose {
+    background:var(--rose); color:#fff;
+    box-shadow:0 4px 20px rgba(184,92,108,.28);
+  }
+  .cbb-rose:hover { background:#a5536a; transform:translateY(-2px); box-shadow:0 8px 28px rgba(184,92,108,.36); }
+  .cbb-outline {
+    background:var(--bg-card); color:var(--graphite);
+    border:1px solid var(--border);
+  }
+  .cbb-outline:hover { border-color:var(--rose); color:var(--rose); transform:translateY(-2px); }
+
+  .cta-note { font-size:12px; color:var(--silver); }
+
+  /* ── FOOTER ── */
+  footer { background:var(--ink); color:#fff; padding:64px 48px 32px; }
+  .footer-in {
+    max-width:1200px; margin:0 auto;
+    display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:48px; margin-bottom:48px;
+  }
+
+  .footer-brand { display:flex; flex-direction:column; gap:16px; }
+  .footer-logo {
+    display:flex; align-items:center; gap:10px;
+    font-size:18px; font-weight:800; color:#fff;
+    text-decoration:none;
+  }
+  .footer-tagline { font-size:13px; color:rgba(255,255,255,.36); line-height:1.8; }
+
+  .footer-col { display:flex; flex-direction:column; gap:12px; }
+  .footer-col-title {
+    font-size:10px; font-weight:700; letter-spacing:1.5px;
+    text-transform:uppercase; color:rgba(255,255,255,.35);
+    margin-bottom:2px;
+  }
+  .footer-link {
+    font-size:13px; color:rgba(255,255,255,.5);
+    text-decoration:none; transition:color .2s;
+  }
+  .footer-link:hover { color:#fff; }
+
+  .footer-bottom {
+    max-width:1200px; margin:0 auto;
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:24px; border-top:1px solid rgba(255,255,255,.08);
+    font-size:12px; color:rgba(255,255,255,.25);
+  }
+
+  /* ── SCROLL ANIMATION ── */
+  .reveal {
+    opacity:0; transform:translateY(24px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.vis { opacity:1; transform:translateY(0); }
+  .reveal-d1 { transition-delay:.1s; }
+  .reveal-d2 { transition-delay:.2s; }
+  .reveal-d3 { transition-delay:.3s; }
+
+  /* ── COUNTER ── */
+  .c-num { display:inline; }
+
+  /* ── LIKE POP ── */
+  @keyframes likePop { 0%{transform:scale(1)}50%{transform:scale(1.5)}100%{transform:scale(1)} }
+  .like-pop { animation:likePop .3s ease; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    nav { padding:14px 20px; }
+    .nav-links { display:none; }
+    .hero { padding:100px 20px 60px; }
+    .hero-inner { grid-template-columns:1fr; gap:48px; }
+    .hero-visual { display:none; }
+    section { padding:72px 20px; }
+    .why-grid  { grid-template-columns:repeat(2,1fr); }
+    .feature-panel.active { grid-template-columns:1fr; }
+    .fp-info { order:2; }
+    .mock-wrap { order:1; }
+    .pricing-grid { grid-template-columns:1fr; max-width:380px; margin:56px auto 0; }
+    .price-card.feat { transform:none; }
+    .stats-grid { grid-template-columns:1fr; gap:32px; }
+    .target-grid { grid-template-columns:repeat(2,1fr); }
+    .footer-in { grid-template-columns:1fr 1fr; }
+    .footer-bottom { flex-direction:column; gap:10px; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="logo">
+    <div class="logo-icon-wrap">
+      <svg class="icon" width="36" height="36"><use href="#ic-logo"/></svg>
+    </div>
+    GritLink
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">機能</a></li>
+    <li><a href="#pricing">料金</a></li>
+    <li><a href="#stats">実績</a></li>
+    <li><a href="#target">こんな人に</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="#" class="btn btn-ghost">ログイン</a>
+    <a href="#" class="btn btn-rose">無料で始める</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        100,000+ ユーザーが利用中
+      </div>
+      <h1 class="hero-title">
+        サボれない環境が、<br>
+        <span class="underline-rose">あなたを変える。</span>
+      </h1>
+      <p class="hero-sub">
+        リアルな1次データと、仲間や好きな人とのつながりで、<br>
+        目標達成までコミュニケーションをロック。<br>
+        今日の努力を、未来の自分へのプレゼントに。
+      </p>
+      <div class="hero-pill-row">
+        <div class="pill">
+          <svg class="icon" width="14" height="14" style="color:var(--rose)"><use href="#ic-lock"/></svg>
+          サボりを防ぐロックシステム
+        </div>
+        <div class="pill">
+          <svg class="icon" width="14" height="14" style="color:var(--steel)"><use href="#ic-camera"/></svg>
+          嘘がつけない1次データ検証
+        </div>
+        <div class="pill">
+          <svg class="icon" width="14" height="14" style="color:var(--sage)"><use href="#ic-users"/></svg>
+          人間関係が最高のモチベに
+        </div>
+      </div>
+      <div class="hero-ctas">
+        <a href="#" class="btn btn-rose" style="padding:13px 28px;font-size:14px;">
+          無料で始める
+          <svg class="icon" width="16" height="16"><use href="#ic-arrow-r"/></svg>
+        </a>
+        <a href="#features" class="btn btn-ghost" style="padding:13px 28px;font-size:14px;">機能を見る</a>
+      </div>
+      <div class="store-row">
+        <a href="#" class="store-btn">
+          <svg class="icon" width="18" height="18"><use href="#ic-apple"/></svg>
+          <div class="s-text">
+            <span class="s-label">Download on the</span>
+            <span class="s-name">App Store</span>
+          </div>
+        </a>
+        <a href="#" class="store-btn">
+          <svg class="icon" width="16" height="16"><use href="#ic-play"/></svg>
+          <div class="s-text">
+            <span class="s-label">GET IT ON</span>
+            <span class="s-name">Google Play</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- HERO PHONE VISUAL -->
+    <div class="hero-visual">
+      <!-- Floating cards -->
+      <div class="f-card fc-users">
+        <div class="f-icon" style="background:var(--rose-pale);">
+          <svg class="icon" width="20" height="20" style="color:var(--rose)"><use href="#ic-users"/></svg>
+        </div>
+        <div>
+          <div class="f-val">100,000+</div>
+          <div class="f-sub">ユーザー突破</div>
+        </div>
+      </div>
+
+      <div class="f-card fc-rating">
+        <div class="f-icon" style="background:#FDF8EC;">
+          <svg class="icon" width="18" height="18" style="color:#C9933A"><use href="#ic-star"/></svg>
+        </div>
+        <div>
+          <div class="f-val">4.8</div>
+          <div class="f-sub">App Store評価</div>
+        </div>
+      </div>
+
+      <div class="f-card fc-streak">
+        <div class="f-icon" style="background:var(--steel-pale);">
+          <svg class="icon" width="18" height="18" style="color:var(--steel)"><use href="#ic-flame"/></svg>
+        </div>
+        <div>
+          <div class="f-val">87日</div>
+          <div class="f-sub">継続記録を更新中</div>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="phone-frame">
+        <div class="phone-dynamic-island"></div>
+        <div class="phone-screen-inner">
+          <div class="ls-feed-bg">
+            <div class="ls-feed-row" style="height:52px">
+              <div class="ls-feed-cell"></div>
+              <div class="ls-feed-cell" style="flex:.7"></div>
+            </div>
+            <div class="ls-feed-row" style="height:64px">
+              <div class="ls-feed-cell" style="flex:.6"></div>
+              <div class="ls-feed-cell"></div>
+            </div>
+            <div class="ls-feed-row" style="height:48px">
+              <div class="ls-feed-cell"></div>
+              <div class="ls-feed-cell" style="flex:.8"></div>
+            </div>
+            <div class="ls-feed-row" style="height:70px">
+              <div class="ls-feed-cell" style="flex:.7"></div>
+              <div class="ls-feed-cell"></div>
+            </div>
+            <div class="ls-feed-row" style="height:52px">
+              <div class="ls-feed-cell"></div>
+              <div class="ls-feed-cell" style="flex:.9"></div>
+            </div>
+          </div>
+          <div class="ls-overlay">
+            <div class="ls-lock-icon">
+              <svg class="icon" width="22" height="22" style="color:var(--rose)"><use href="#ic-lock"/></svg>
+            </div>
+            <div class="ls-locked-word">Locked.</div>
+            <div class="ls-hint">目標を達成してロックを解除しよう！</div>
+            <div class="ls-task">
+              <div class="ls-task-label">
+                <svg class="icon" width="8" height="8" style="color:var(--rose)"><use href="#ic-alert"/></svg>
+                Task Incomplete
+              </div>
+              <div class="ls-task-name">レポート提出（23:59まで）</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SECTION -->
+<section class="sec-why">
+  <div class="section-in">
+    <div class="sec-tag">
+      <svg class="icon" width="12" height="12"><use href="#ic-sparkle"/></svg>
+      GritLinkが選ばれる理由
+    </div>
+    <h2 class="sec-title">続けられる仕組みが、<br>ここにある。</h2>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon" style="background:var(--rose-pale)">
+          <svg class="icon" width="22" height="22" style="color:var(--rose)"><use href="#ic-shield"/></svg>
+        </div>
+        <div class="why-title">嘘がつけない仕組みで本気の自分になれる</div>
+        <div class="why-desc">インカメラ・位置情報・スクリーンタイムで証明する1次データ検証システム。</div>
+      </div>
+      <div class="why-card reveal reveal-d1">
+        <div class="why-icon" style="background:var(--steel-pale)">
+          <svg class="icon" width="22" height="22" style="color:var(--steel)"><use href="#ic-users"/></svg>
+        </div>
+        <div class="why-title">仲間や好きな人とのつながりが力になる</div>
+        <div class="why-desc">2ショットルームでリアルタイムに繋がり、互いの頑張りが見えるから諦められない。</div>
+      </div>
+      <div class="why-card reveal reveal-d2">
+        <div class="why-icon" style="background:var(--sage-pale)">
+          <svg class="icon" width="22" height="22" style="color:var(--sage)"><use href="#ic-chart"/></svg>
+        </div>
+        <div class="why-title">継続が可視化されて成長を実感できる</div>
+        <div class="why-desc">毎日の1次データがタイムラインに蓄積され、過去の自分との差分が一目でわかる。</div>
+      </div>
+      <div class="why-card reveal reveal-d3">
+        <div class="why-icon" style="background:#FDF8EC">
+          <svg class="icon" width="22" height="22" style="color:#C9933A"><use href="#ic-gift"/></svg>
+        </div>
+        <div class="why-title">達成するとご褒美や特典がもらえる</div>
+        <div class="why-desc">コミュニティ・プールで目標達成者に報酬分配。ゲーム感覚で続けられる設計。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BREAK -->
+<section class="sec-quote">
+  <p class="quote-text reveal">
+    一人じゃ続かないことも、<br>
+    みんなとなら<em>乗り越えられる。</em><br>
+    それが GritLink。
+  </p>
+</section>
+
+<!-- FEATURES SECTION -->
+<section id="features">
+  <div class="section-in">
+    <div style="text-align:center;margin-bottom:52px;" class="reveal">
+      <div class="sec-tag" style="justify-content:center">
+        <svg class="icon" width="12" height="12"><use href="#ic-sparkle"/></svg>
+        4つのコア機能
+      </div>
+      <h2 class="sec-title">4つのコア機能で、<br>目標達成をサポート</h2>
+      <p class="sec-sub" style="margin:0 auto">タブを切り替えて各機能のUIを確認できます。</p>
+    </div>
+
+    <div class="feature-tabs">
+      <button class="tab-btn active" onclick="switchTab(1)">
+        <span class="tab-num">01</span>コミュニケーション・ロック
+      </button>
+      <button class="tab-btn" onclick="switchTab(2)">
+        <span class="tab-num">02</span>1次データ撮影・投稿
+      </button>
+      <button class="tab-btn" onclick="switchTab(3)">
+        <span class="tab-num">03</span>2ショット・ルーム
+      </button>
+      <button class="tab-btn" onclick="switchTab(4)">
+        <span class="tab-num">04</span>タイムライン＆公開処刑
+      </button>
+    </div>
+
+    <!-- ── PANEL 1 ── -->
+    <div class="feature-panel active" id="panel-1">
+      <div class="fp-info">
+        <div class="fp-num">01</div>
+        <h3 class="fp-title">コミュニケーション・<br>ロック</h3>
+        <p class="fp-desc">目標未達成なら、タイムラインもDMもロック、サボりを防止。スマホ依存を逆手に取った、究極の強制集中システム。</p>
+        <div class="fp-points">
+          <div class="fp-point"><div class="fp-dot"></div>タスク未達成でSNS全機能をロック</div>
+          <div class="fp-point"><div class="fp-dot"></div>ロック中はすりガラスでタイムラインが見える・触れない</div>
+          <div class="fp-point"><div class="fp-dot"></div>緊急連絡は特定の相手のみ許可可能</div>
+          <div class="fp-point"><div class="fp-dot"></div>タスク達成で即座にロック解除</div>
+        </div>
+      </div>
+      <div class="mock-wrap">
+        <div class="mock-device">
+          <div class="mock-di"></div>
+          <div class="mock-screen">
+            <div class="mock-status-bar">
+              <span style="font-weight:700">9:41</span>
+              <div class="mock-status-right">
+                <div class="signal-bars"><span></span><span></span><span></span></div>
+                <div class="battery"><div class="battery-body"><div class="battery-fill"></div></div><div class="battery-tip"></div></div>
+              </div>
+            </div>
+            <div class="m1-body">
+              <div class="m1-feed">
+                <div class="m1-feed-item"></div>
+                <div class="m1-feed-item" style="height:58px"></div>
+                <div class="m1-feed-item" style="height:44px"></div>
+                <div class="m1-feed-item" style="height:66px"></div>
+                <div class="m1-feed-item" style="height:52px"></div>
+                <div class="m1-feed-item"></div>
+              </div>
+              <div class="m1-overlay">
+                <div class="m1-lock-box">
+                  <svg class="icon" width="20" height="20" style="color:var(--rose)"><use href="#ic-lock"/></svg>
+                </div>
+                <div class="m1-locked">Locked.</div>
+                <div class="m1-sub">目標を達成してロックを解除しよう！</div>
+                <div class="m1-task">
+                  <div class="m1-task-lbl">
+                    <svg class="icon" width="8" height="8" style="color:var(--rose)"><use href="#ic-alert"/></svg>
+                    Task Incomplete
+                  </div>
+                  <div class="m1-task-name">レポート提出（23:59まで）</div>
+                </div>
+              </div>
+            </div>
+            <div class="m1-nav">
+              <div class="m1-nav-item"><svg class="icon" width="17" height="17"><use href="#ic-home"/></svg></div>
+              <div class="m1-nav-item"><svg class="icon" width="17" height="17"><use href="#ic-users"/></svg></div>
+              <div class="m1-nav-item act"><svg class="icon" width="17" height="17" style="color:var(--rose)"><use href="#ic-lock"/></svg></div>
+              <div class="m1-nav-item"><svg class="icon" width="17" height="17"><use href="#ic-bell"/></svg></div>
+              <div class="m1-nav-item"><svg class="icon" width="17" height="17"><use href="#ic-user"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PANEL 2 ── -->
+    <div class="feature-panel" id="panel-2">
+      <div class="fp-info">
+        <div class="fp-num steel">02</div>
+        <h3 class="fp-title">1次データ撮影・<br>投稿</h3>
+        <p class="fp-desc">インカメラ＋アウトカメラでその瞬間を記録。位置情報やスクリーンタイムも自動録画。BeReal感覚で"今ここにいる"を証明。</p>
+        <div class="fp-points">
+          <div class="fp-point"><div class="fp-dot steel"></div>インカメラ＋アウトカメラの同時撮影</div>
+          <div class="fp-point"><div class="fp-dot steel"></div>位置情報が自動でスタンプされる</div>
+          <div class="fp-point"><div class="fp-dot steel"></div>その日のスクリーンタイムも記録</div>
+          <div class="fp-point"><div class="fp-dot steel"></div>加工・編集一切不可のRAWデータ</div>
+        </div>
+      </div>
+      <div class="mock-wrap">
+        <div class="mock-device">
+          <div class="mock-di"></div>
+          <div class="mock-screen">
+            <div class="mock-status-bar">
+              <span>9:41</span>
+              <div class="mock-status-right">
+                <div class="signal-bars"><span></span><span></span><span></span></div>
+                <div class="battery"><div class="battery-body"><div class="battery-fill"></div></div><div class="battery-tip"></div></div>
+              </div>
+            </div>
+            <div class="m2-body">
+              <div class="cam-grid">
+                <div class="cam-half cam-a">
+                  <div class="cam-illustration">
+                    <div class="cam-face"><div class="cam-face-inner"></div></div>
+                  </div>
+                  <div class="cam-tag">自分（インカメ）</div>
+                  <div class="cam-ts">09:41</div>
+                </div>
+                <div class="cam-half cam-b">
+                  <div class="cam-illustration">
+                    <div class="cam-env-rows">
+                      <div class="cam-env-row"></div>
+                      <div class="cam-env-row"></div>
+                      <div class="cam-env-row"></div>
+                    </div>
+                  </div>
+                  <div class="cam-tag">環境（アウトカメ）</div>
+                  <div class="cam-ts">00:48</div>
+                </div>
+              </div>
+              <div class="m2-meta">
+                <div class="m2-meta-row">
+                  <svg class="icon" width="10" height="10" style="color:var(--steel)"><use href="#ic-pin"/></svg>
+                  Fujisawa Station Café &nbsp;09:41 AM
+                </div>
+                <div class="m2-meta-row">
+                  <svg class="icon" width="10" height="10" style="color:var(--mist)"><use href="#ic-phone"/></svg>
+                  Screen Time : 23m
+                </div>
+              </div>
+              <div class="m2-btns">
+                <button class="m2-btn-re">再撮影</button>
+                <button class="m2-btn-post">
+                  投稿する
+                  <svg class="icon" width="10" height="10"><use href="#ic-check"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PANEL 3 ── -->
+    <div class="feature-panel" id="panel-3">
+      <div class="fp-info">
+        <div class="fp-num sage">03</div>
+        <h3 class="fp-title">2ショット・<br>ルーム</h3>
+        <p class="fp-desc">好きな人や相棒と繋がる相互監視ルーム。お互いの頑張りがリアルタイムでわかる。一緒にいる感覚が最高のモチベーションに。</p>
+        <div class="fp-points">
+          <div class="fp-point"><div class="fp-dot sage"></div>2人だけの専用スタディルーム</div>
+          <div class="fp-point"><div class="fp-dot sage"></div>リアルタイムのステータス（Working / Sleeping）</div>
+          <div class="fp-point"><div class="fp-dot sage"></div>インスタストーリー風のステータスリング</div>
+          <div class="fp-point"><div class="fp-dot sage"></div>集中中はメッセージが自動でミュートに</div>
+        </div>
+      </div>
+      <div class="mock-wrap">
+        <div class="mock-device">
+          <div class="mock-di"></div>
+          <div class="mock-screen">
+            <div class="mock-status-bar">
+              <span>9:44</span>
+              <div class="mock-status-right">
+                <div class="signal-bars"><span></span><span></span><span></span></div>
+                <div class="battery"><div class="battery-body"><div class="battery-fill"></div></div><div class="battery-tip"></div></div>
+              </div>
+            </div>
+            <div class="m3-body">
+              <div class="m3-header">
+                <div class="m3-title">2ショット・ルーム</div>
+                <div class="m3-online">● 2人オンライン</div>
+              </div>
+              <div class="m3-grid">
+                <!-- AOI -->
+                <div class="m3-slot">
+                  <div class="m3-avatar-group">
+                    <div class="m3-ring m3-ring-green">
+                      <div class="m3-avatar">
+                        <div class="m3-face m3-face-green"></div>
+                      </div>
+                    </div>
+                    <div class="m3-name">AOI</div>
+                    <div class="status-pill sp-green">
+                      <div class="sp-dot"></div> Working
+                    </div>
+                  </div>
+                  <div class="m3-actions">
+                    <div class="m3-act-btn"><svg class="icon" width="12" height="12"><use href="#ic-comment"/></svg></div>
+                    <div class="m3-act-btn"><svg class="icon" width="12" height="12"><use href="#ic-video"/></svg></div>
+                  </div>
+                </div>
+                <!-- HARUKI -->
+                <div class="m3-slot">
+                  <div class="m3-avatar-group">
+                    <div class="m3-ring m3-ring-rose">
+                      <div class="m3-avatar">
+                        <div class="m3-face m3-face-rose"></div>
+                      </div>
+                    </div>
+                    <div class="m3-name">HARUKI</div>
+                    <div class="status-pill sp-rose">
+                      <div class="sp-dot"></div> Sleeping...
+                    </div>
+                  </div>
+                  <div class="m3-actions">
+                    <div class="m3-act-btn"><svg class="icon" width="12" height="12"><use href="#ic-bell"/></svg></div>
+                    <div class="m3-act-btn"><svg class="icon" width="12" height="12"><use href="#ic-comment"/></svg></div>
+                  </div>
+                </div>
+              </div>
+              <div class="m3-footer">
+                <button class="m3-foot-btn">
+                  <svg class="icon" width="11" height="11"><use href="#ic-comment"/></svg> メッセージ
+                </button>
+                <button class="m3-foot-btn">
+                  <svg class="icon" width="11" height="11"><use href="#ic-video"/></svg> ビデオ
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PANEL 4 ── -->
+    <div class="feature-panel" id="panel-4">
+      <div class="fp-info">
+        <div class="fp-num">04</div>
+        <h3 class="fp-title">タイムライン＆<br>公開処刑</h3>
+        <p class="fp-desc">みんなの1次データが流れるフィード。サボりはポップに公開されてやる気アップ！達成者はヒーロー、サボり者はみんなの応援対象に。</p>
+        <div class="fp-points">
+          <div class="fp-point"><div class="fp-dot"></div>1次データ写真が流れるリアルフィード</div>
+          <div class="fp-point"><div class="fp-dot"></div>サボりはアラートバナーで全体に通知</div>
+          <div class="fp-point"><div class="fp-dot"></div>いいね・コメントで仲間を応援</div>
+          <div class="fp-point"><div class="fp-dot"></div>頑張りが蓄積される自分だけのアーカイブ</div>
+        </div>
+      </div>
+      <div class="mock-wrap">
+        <div class="mock-device">
+          <div class="mock-di"></div>
+          <div class="mock-screen">
+            <div class="mock-status-bar">
+              <span>9:44</span>
+              <div class="mock-status-right">
+                <div class="signal-bars"><span></span><span></span><span></span></div>
+                <div class="battery"><div class="battery-body"><div class="battery-fill"></div></div><div class="battery-tip"></div></div>
+              </div>
+            </div>
+            <div class="m4-body">
+              <div class="m4-alert" onclick="this.style.opacity='.6'">
+                <svg class="icon m4-alert-icon" width="13" height="13"><use href="#ic-alert"/></svg>
+                <span><strong>Oops! Haruki skipped today.</strong><br>みんなで応援してあげよう！</span>
+                <span class="m4-alert-arrow">›</span>
+              </div>
+              <div class="m4-feed">
+                <!-- Item 1 -->
+                <div class="m4-item">
+                  <div class="m4-item-hd">
+                    <div class="m4-ava m4-ava-a">
+                      <svg class="icon" width="14" height="14" style="color:#fff"><use href="#ic-user"/></svg>
+                    </div>
+                    <div class="m4-user-info">
+                      <div class="m4-uname">AOI</div>
+                      <div class="m4-uloc">
+                        <svg class="icon" width="8" height="8"><use href="#ic-pin"/></svg>
+                        Fukuoka Library
+                      </div>
+                    </div>
+                    <div class="m4-utime">2分前</div>
+                  </div>
+                  <div class="m4-photo m4-photo-a">
+                    <div class="photo-abstract">
+                      <div class="photo-desk">
+                        <div class="photo-desk-top"></div>
+                        <div class="photo-desk-lines">
+                          <div class="photo-desk-line"></div>
+                          <div class="photo-desk-line"></div>
+                          <div class="photo-desk-line"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="photo-tag">Fukuoka Library</div>
+                  </div>
+                  <div class="m4-actions">
+                    <div class="m4-action liked" onclick="toggleLike(this)" data-c="24">
+                      <svg class="icon" width="12" height="12" style="color:var(--rose)"><use href="#ic-heart"/></svg>
+                      <span>24</span>
+                    </div>
+                    <div class="m4-action">
+                      <svg class="icon" width="12" height="12"><use href="#ic-comment"/></svg>
+                      <span>8</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="m4-item">
+                  <div class="m4-item-hd">
+                    <div class="m4-ava m4-ava-b">
+                      <svg class="icon" width="14" height="14" style="color:#fff"><use href="#ic-user"/></svg>
+                    </div>
+                    <div class="m4-user-info">
+                      <div class="m4-uname">YUTO</div>
+                      <div class="m4-uloc">
+                        <svg class="icon" width="8" height="8"><use href="#ic-pin"/></svg>
+                        Starbucks
+                      </div>
+                    </div>
+                    <div class="m4-utime">15分前</div>
+                  </div>
+                  <div class="m4-photo m4-photo-b">
+                    <div class="photo-abstract">
+                      <div class="photo-desk">
+                        <div class="photo-desk-top"></div>
+                        <div class="photo-desk-lines">
+                          <div class="photo-desk-line"></div>
+                          <div class="photo-desk-line"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="photo-tag">Starbucks</div>
+                  </div>
+                  <div class="m4-actions">
+                    <div class="m4-action" onclick="toggleLike(this)" data-c="11">
+                      <svg class="icon" width="12" height="12"><use href="#ic-heart-o"/></svg>
+                      <span>11</span>
+                    </div>
+                    <div class="m4-action">
+                      <svg class="icon" width="12" height="12"><use href="#ic-comment"/></svg>
+                      <span>3</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec-pricing" id="pricing">
+  <div class="section-in">
+    <div style="text-align:center;margin-bottom:0" class="reveal">
+      <div class="sec-tag" style="justify-content:center">
+        <svg class="icon" width="12" height="12"><use href="#ic-sparkle"/></svg>
+        シンプルでお得なプラン
+      </div>
+      <h2 class="sec-title">あなたに合ったプランで<br>始めよう</h2>
+      <p class="sec-sub" style="margin:0 auto">まずは無料で始めて、必要になったらアップグレード。</p>
+    </div>
+    <div class="pricing-grid">
+      <!-- Free -->
+      <div class="price-card reveal">
+        <div>
+          <div class="plan-name">フリー</div>
+          <div class="plan-price">
+            <span class="plan-cur">¥</span>
+            <span class="plan-num">0</span>
+            <span class="plan-per">/ 月</span>
+          </div>
+        </div>
+        <div class="plan-desc">まずはGritLinkを体験してみたい方に。基本的なサボり防止機能を無料でお試しいただけます。</div>
+        <div class="plan-features">
+          <div class="plan-feat">
+            <svg class="icon" width="18" height="18" style="color:var(--sage)"><use href="#ic-check"/></svg>基本機能
+          </div>
+          <div class="plan-feat">
+            <svg class="icon" width="18" height="18" style="color:var(--sage)"><use href="#ic-check"/></svg>1次データ共有
+          </div>
+          <div class="plan-feat">
+            <svg class="icon" width="18" height="18" style="color:var(--sage)"><use href="#ic-check"/></svg>最大3人までのグループ
+          </div>
+        </div>
+        <button class="plan-cta cta-outline">無料で始める</button>
+      </div>
+      <!-- Pro -->
+      <div class="price-card feat reveal reveal-d1">
+        <div class="feat-tag">おすすめ</div>
+        <div>
+          <div class="plan-name" style="color:var(--rose)">プロ</div>
+          <div class="plan-price">
+            <span class="plan-cur" style="color:var(--rose)">¥</span>
+            <span class="plan-num rose">980</span>
+            <span class="plan-per">/ 月</span>
+          </div>
+        </div>
+        <div class="plan-desc">本気で目標を達成したい方に。広告なしの快適な環境で全機能をフル活用できます。</div>
+        <div class="plan-features">
+          <div class="plan-feat">
+            <svg class="icon" width="18" height="18" style="color:var(--rose)"><use href="#ic-check"/></svg>広告なしで快適に
+          </div>
+          <div class="plan-feat">
+            <svg class="icon" width="18" height="18" style="color:var(--rose)"><use href="#ic-check"/></svg>2ショット・ルーム無制限
+          </div>
+          <div class="plan-feat">
+            <svg class="icon" width="18" height="18" style="color:var(--rose)"><use href="#ic-check"/></svg>限定ステータス解放
+          </div>
+          <div class="plan-feat">
+            <svg class="icon" width="18" height="18" style="color:var(--rose)"><use href="#ic-check"/></svg>詳細な達成アナリティクス
+          </div>
+          <div class="plan-feat">
+            <svg class="icon" width="18" height="18" style="color:var(--rose)"><use href="#ic-check"/></svg>フリープランの全機能
+          </div>
+        </div>
+        <button class="plan-cta cta-rose">プロにアップグレード →</button>
+      </div>
+      <!-- Community Pool -->
+      <div class="price-card reveal reveal-d2">
+        <div>
+          <div class="plan-name">コミュニティ・プール</div>
+          <div class="plan-price" style="margin-top:10px">
+            <span class="plan-num" style="font-size:28px;letter-spacing:-.5px">都度課金</span>
+          </div>
+        </div>
+        <div class="plan-desc">ゲーム感覚で達成を競いたい方に。プールに参加して達成者へ報酬が分配されます。</div>
+        <div class="plan-features">
+          <div class="plan-feat">
+            <svg class="icon" width="18" height="18" style="color:var(--steel)"><use href="#ic-check"/></svg>目標未達成で罰金発生
+          </div>
+          <div class="plan-feat">
+            <svg class="icon" width="18" height="18" style="color:var(--steel)"><use href="#ic-check"/></svg>達成者に報酬が分配される
+          </div>
+          <div class="plan-feat">
+            <svg class="icon" width="18" height="18" style="color:var(--steel)"><use href="#ic-check"/></svg>ゲーム感覚で続けられる
+          </div>
+          <div class="plan-feat">
+            <svg class="icon" width="18" height="18" style="color:var(--steel)"><use href="#ic-check"/></svg>プロプラン限定機能
+          </div>
+        </div>
+        <button class="plan-cta cta-steel">詳細を見る</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="sec-stats" id="stats">
+  <div class="section-in">
+    <div style="text-align:center" class="reveal">
+      <div class="sec-tag" style="color:rgba(255,255,255,.35);justify-content:center">
+        <svg class="icon" width="12" height="12"><use href="#ic-sparkle"/></svg>
+        利用者急増中
+      </div>
+      <h2 class="sec-title" style="color:#fff">数字が証明する、<br>GritLinkの力。</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-icon-wrap">
+          <svg class="icon" width="28" height="28" style="color:rgba(255,255,255,.6)"><use href="#ic-users"/></svg>
+        </div>
+        <div class="stat-num"><span class="c-num" data-target="100000">0</span>+</div>
+        <div class="stat-label">ユーザー突破</div>
+      </div>
+      <div class="stat-item reveal reveal-d1">
+        <div class="stat-icon-wrap">
+          <svg class="icon" width="28" height="28" style="color:rgba(255,255,255,.6)"><use href="#ic-star"/></svg>
+        </div>
+        <div class="stat-num"><span class="c-num" data-target="4.8" data-dec="1">0</span></div>
+        <div class="stat-label">App Store 平均評価</div>
+      </div>
+      <div class="stat-item reveal reveal-d2">
+        <div class="stat-icon-wrap">
+          <svg class="icon" width="28" height="28" style="color:rgba(255,255,255,.6)"><use href="#ic-flame"/></svg>
+        </div>
+        <div class="stat-num"><span class="c-num" data-target="78">0</span>%</div>
+        <div class="stat-label">30日継続率（業界平均の3倍）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TARGET -->
+<section id="target">
+  <div class="section-in">
+    <div style="text-align:center" class="reveal">
+      <div class="sec-tag" style="justify-content:center">
+        <svg class="icon" width="12" height="12"><use href="#ic-sparkle"/></svg>
+        こんな人におすすめ
+      </div>
+      <h2 class="sec-title">あなたの目標に、<br>GritLinkを。</h2>
+    </div>
+    <div class="target-grid">
+      <div class="target-card reveal">
+        <div class="target-icon-wrap">
+          <svg class="icon" width="26" height="26" style="color:var(--rose)"><use href="#ic-book"/></svg>
+        </div>
+        <div class="target-label">勉強・資格に<br>集中したい人</div>
+      </div>
+      <div class="target-card reveal reveal-d1">
+        <div class="target-icon-wrap">
+          <svg class="icon" width="26" height="26" style="color:var(--steel)"><use href="#ic-flame"/></svg>
+        </div>
+        <div class="target-label">ダイエットや習慣を<br>続けたい人</div>
+      </div>
+      <div class="target-card reveal reveal-d2">
+        <div class="target-icon-wrap">
+          <svg class="icon" width="26" height="26" style="color:var(--sage)"><use href="#ic-pen"/></svg>
+        </div>
+        <div class="target-label">テスト・受験を<br>乗り切りたい人</div>
+      </div>
+      <div class="target-card reveal reveal-d3">
+        <div class="target-icon-wrap">
+          <svg class="icon" width="26" height="26" style="color:#C9933A"><use href="#ic-handshake"/></svg>
+        </div>
+        <div class="target-label">仲間と一緒に<br>成長したい人</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec-cta">
+  <div style="position:relative;z-index:1">
+    <div class="cta-eyebrow">
+      <svg class="icon" width="12" height="12"><use href="#ic-sparkle"/></svg>
+      今日から、サボれない最高の自分へ
+    </div>
+    <h2 class="cta-title">今すぐ無料で<br>始めよう。</h2>
+    <p class="cta-sub">アカウント登録は1分で完了。クレジットカード不要。</p>
+    <div class="cta-btns">
+      <a href="#" class="cta-btn-big cbb-rose">
+        <svg class="icon" width="18" height="18"><use href="#ic-apple"/></svg>
+        App Storeからダウンロード
+      </a>
+      <a href="#" class="cta-btn-big cbb-outline">
+        <svg class="icon" width="16" height="16"><use href="#ic-play"/></svg>
+        Google Playで入手
+      </a>
+    </div>
+    <p class="cta-note">まずは無料プランで始めて、いつでもアップグレード可能</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-in">
+    <div class="footer-brand">
+      <a href="#" class="footer-logo">
+        <svg class="icon" width="30" height="30"><use href="#ic-logo"/></svg>
+        GritLink
+      </a>
+      <p class="footer-tagline">
+        サボれない環境が、あなたを変える。<br>
+        リアルな1次データと仲間のつながりで<br>目標達成をサポートする次世代SNS。
+      </p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">プロダクト</div>
+      <a href="#" class="footer-link">機能</a>
+      <a href="#" class="footer-link">料金プラン</a>
+      <a href="#" class="footer-link">ダウンロード</a>
+      <a href="#" class="footer-link">更新履歴</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">会社</div>
+      <a href="#" class="footer-link">私たちについて</a>
+      <a href="#" class="footer-link">ブログ</a>
+      <a href="#" class="footer-link">採用情報</a>
+      <a href="#" class="footer-link">お問い合わせ</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">法的情報</div>
+      <a href="#" class="footer-link">利用規約</a>
+      <a href="#" class="footer-link">プライバシーポリシー</a>
+      <a href="#" class="footer-link">特定商取引法</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 GritLink, Inc. All rights reserved.</div>
+    <div>サボれない環境が、あなたを変える。</div>
+  </div>
+</footer>
+
+<script>
+// ── Tab switcher ──
+function switchTab(n) {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i === n-1));
+  document.querySelectorAll('.feature-panel').forEach((p,i) => p.classList.toggle('active', i === n-1));
+}
+
+// ── Scroll reveal ──
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('vis');
+      if (e.target.closest('.sec-stats')) kickCounters();
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+// ── Counter ──
+let counted = false;
+function kickCounters() {
+  if (counted) return;
+  counted = true;
+  document.querySelectorAll('.c-num').forEach(el => {
+    const target = parseFloat(el.dataset.target);
+    const dec    = parseInt(el.dataset.dec || '0');
+    const dur    = 1800;
+    const t0     = performance.now();
+    const tick = now => {
+      const p  = Math.min((now - t0) / dur, 1);
+      const e  = 1 - Math.pow(1 - p, 3);
+      const v  = e * target;
+      el.textContent = dec ? v.toFixed(dec) : Math.floor(v).toLocaleString('ja-JP');
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = dec ? target.toFixed(dec) : target.toLocaleString('ja-JP');
+    };
+    requestAnimationFrame(tick);
+  });
+}
+
+// ── Like toggle ──
+function toggleLike(el) {
+  const liked = el.classList.contains('liked');
+  const svgUse = el.querySelector('use');
+  const cnt    = el.querySelector('span');
+  const c      = parseInt(el.dataset.c);
+  if (liked) {
+    el.classList.remove('liked');
+    svgUse.setAttribute('href','#ic-heart-o');
+    el.style.color = '';
+    cnt.textContent = c - 1;
+    el.dataset.c = c - 1;
+  } else {
+    el.classList.add('liked');
+    svgUse.setAttribute('href','#ic-heart');
+    el.style.color = 'var(--rose)';
+    cnt.textContent = c + 1;
+    el.dataset.c = c + 1;
+    el.classList.add('like-pop');
+    setTimeout(() => el.classList.remove('like-pop'), 320);
+  }
+}
+
+// ── Nav shadow on scroll ──
+window.addEventListener('scroll', () => {
+  document.getElementById('main-nav').style.boxShadow =
+    window.scrollY > 20 ? '0 2px 16px rgba(26,31,46,.07)' : 'none';
+}, { passive: true });
+
+// ── Smooth anchor scroll ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior:'smooth', block:'start' }); }
+  });
+});
+</script>
+</body>
+</html>
